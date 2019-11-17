@@ -85,7 +85,51 @@
 
             return $"{output}}}";
         }
-        
+
+        /// <summary>
+        /// Метод сортирует массив массивов, игнорируя размерность и положение подмассивов.
+        /// </summary>
+        /// <param name="arrayToSort"></param>
+        /// <param name="onlyCopy"></param>
+        /// <returns></returns>
+        public static int [][] DoubleSortBetweenArrays(int[][] arrayToSort, bool onlyCopy = false)
+        {
+            int[][] arrayToWork = (onlyCopy ? (int[][])arrayToSort.Clone() : arrayToSort);
+            int[] temp;
+
+            int fullCount = 0;
+
+            foreach(int [] array in arrayToWork)
+            {
+                fullCount += array.Length;
+            }
+
+            temp = new int[fullCount];
+            int counter = 0;
+
+            foreach (int [] array in arrayToWork)
+            {
+                foreach(int element in array)
+                {
+                    temp[counter] = element;
+                    counter++;
+                }
+            }
+            Sort(temp);
+            int indexForWrite = 0;
+
+            for(int i = 0; i < arrayToWork.Length; i++)
+            {
+                for(int j = 0; j < arrayToWork[i].Length; j++)
+                {
+                    arrayToWork[i][j] = temp[indexForWrite];
+                    indexForWrite++;
+                }
+            }
+
+            return arrayToWork;
+        }
+
         /// <summary>
         /// Метод сортировки двойного массива. Сортирует сначала каждый вложенный массив, а затем массив массивов по первому элементу.
         /// </summary>

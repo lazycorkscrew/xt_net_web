@@ -14,15 +14,15 @@ namespace EpamTasks
             Console.WriteLine(FunctionsLibrary.Sequence(TryReadLineInt()));
             Console.ReadKey();
 
-            Console.WriteLine("\nВведите целое число, и я вам скажу, является ли оно простым: ");
+            Console.WriteLine("\n\nВведите целое число, и я вам скажу, является ли оно простым: ");
             Console.WriteLine(FunctionsLibrary.Prime(TryReadLineInt())? "Число простое." : "Число не простое." );
             Console.ReadKey();
 
-            Console.WriteLine("\nВведите целое число, и я вам нарисую квадрат из звёздочек, а в середине пусто: ");
+            Console.WriteLine("\n\nВведите целое число, и я вам нарисую квадрат из звёздочек, а в середине пусто: ");
             Console.WriteLine(FunctionsLibrary.Square(TryReadLineInt()));
             Console.ReadKey();
 
-            Console.WriteLine("\nВведите размерность ступенчатого массива: ");
+            Console.WriteLine("\n\nВведите размерность ступенчатого массива: ");
             int[][] doubleArray = new int[TryReadLineInt()][];
 
             Random r = new Random();
@@ -40,7 +40,8 @@ namespace EpamTasks
                 Console.WriteLine();
             }
             
-            Console.WriteLine($" Ваш отсортированный двумерный массив: \n{FunctionsLibrary.ArrayToString(FunctionsLibrary.DoubleSort(doubleArray))}");
+            Console.WriteLine($"\n Ваш отсортированный двумерный массив: \n{FunctionsLibrary.ArrayToString(FunctionsLibrary.DoubleSort(doubleArray, true))}");
+            Console.WriteLine($"\n Сортировка между массивов: \n{FunctionsLibrary.ArrayToString(FunctionsLibrary.DoubleSortBetweenArrays(doubleArray, true))}");
             Console.ReadKey();
         }
 
