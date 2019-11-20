@@ -114,6 +114,110 @@ namespace Task01
                 $"Отсортированный массив: {ArrayToString(Sort(array))}";
         }
 
+        //Task 1.8
+        public static void NoPositive(int [,,] array)
+        {
+            int iLenght = array.GetLength(0);
+            int jLenght = array.GetLength(1);
+            int kLenght = array.GetLength(2);
+
+            for (int i = 0; i < iLenght; i++)
+            {
+                for (int j = 0; j < jLenght; j++)
+                {
+                    for (int k = 0; k < kLenght; k++)
+                    {
+                        if(array[i, j, k] > 0)
+                        {
+                            array[i, j, k] = 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        //Task 1.9
+        public static int NonNegativSum(int[] array)
+        {
+            int sum = 0;
+            for(int i = 0; i < array.Length; i++)
+            {
+                if(array[i] > 0)
+                {
+                    sum += array[i];
+                }
+            }
+
+            return sum;
+        }
+
+        //Task 1.10
+        public static int XYArrayEvenIndexesSum(int[,] array)
+        {
+            int iLength = array.GetLength(0);
+            int jLength = array.GetLength(1);
+            int sum = 0;
+
+            for (int i = 0; i < iLength; i++)
+            {
+                for (int j = 0; j < jLength; j++)
+                {
+                    if( (i+j) %2 == 0 )
+                    {
+                        sum += array[i, j];
+                    }
+                }
+            }
+
+            return sum;
+        }
+
+        public static string XYArrayToString(int[,] array)
+        {
+            int iLenght = array.GetLength(0);
+            int jLenght = array.GetLength(1);
+
+            string result = string.Empty;
+
+            for (int i = 0; i < iLenght; i++)
+            {
+                result = $"{result}{{";
+                for (int j = 0; j < jLenght; j++)
+                {
+                    result = $"{result}{array[i, j]}, ";
+                }
+                result = $"{result}}}\n";
+            }
+
+            return result;
+        }
+
+        public static string XYZArrayToString(int[,,] array)
+        {
+            int iLenght = array.GetLength(0);
+            int jLenght = array.GetLength(1);
+            int kLenght = array.GetLength(2);
+
+            string result = string.Empty;
+
+            for (int i = 0; i < iLenght; i++)
+            {
+                result = $"{result}{{\n";
+                for (int j = 0; j < jLenght; j++)
+                {
+                    result = $"{result}    {{ ";
+                    for (int k = 0; k < kLenght; k++)
+                    {
+                        result = $"{result}{array[i, j, k]}, ";
+                    }
+                    result = $"{result}}}\n";
+                }
+                result = $"{result}}}\n";
+            }
+
+            return result;
+        }
+
         public static string ArrayToString(int [] array)
         {
             string result = "{";
@@ -180,11 +284,8 @@ namespace Task01
                     }
                 }
             }
+
             return arrayToWork;
         }
-
-        
-
-
     }
 }

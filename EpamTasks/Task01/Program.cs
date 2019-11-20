@@ -9,6 +9,8 @@ namespace Task01
 {
     class Program
     {
+        static Random r = new Random();
+
         static void Main(string[] args)
         {
             Console.WriteLine("Добрый день. Давайте приступим к заданиям.");
@@ -19,6 +21,7 @@ namespace Task01
             Console.WriteLine("\nВот так-то лучше :) Итак, первое задание: вычислить площадь прямоугольника.");
 
             //Задание 1
+            Console.WriteLine("\nЗадание № 1 - Площадь прямоугольника.");
             Console.WriteLine("Введите сторону А: ");
             decimal a = TryReadLineDecimal();
             Console.WriteLine("Введите сторону B: ");
@@ -27,17 +30,17 @@ namespace Task01
             Console.ReadKey();
 
             //Задание 2
-            Console.WriteLine($"\nЗадание № 2 - прямоугольный треугольник из звёздочек. Сколько строк вы хотите им занять?");
+            Console.WriteLine("\nЗадание № 2 - прямоугольный треугольник из звёздочек. Сколько строк вы хотите им занять?");
             Console.WriteLine(FunctionsLibrary.Triangle(TryReadLineInt()));
             Console.ReadKey();
 
             //Задание 3
-            Console.WriteLine($"\nЗадание № 3 - Равнобедренный треугольник из звёздочек. Сколько строк вы хотите им занять?");
+            Console.WriteLine("\nЗадание № 3 - Равнобедренный треугольник из звёздочек. Сколько строк вы хотите им занять?");
             Console.WriteLine(FunctionsLibrary.AnotherTriangle(TryReadLineInt()));
             Console.ReadKey();
 
             //Задание 4
-            Console.WriteLine($"\nЗадание № 4 - Ёлочка из звёздочек. Сколько строк вы хотите ей занять?");
+            Console.WriteLine("\nЗадание № 4 - Ёлочка из звёздочек. Сколько строк вы хотите ей занять?");
             Console.WriteLine(FunctionsLibrary.XmasTree(TryReadLineInt()));
             Console.ReadKey();
 
@@ -52,7 +55,7 @@ namespace Task01
             
             do
             {
-                Console.WriteLine($"\nЗадание № 6 - Стили текста.");
+                Console.WriteLine("\nЗадание № 6 - Стили текста.");
                 Console.WriteLine("1 - добавить/убрать Bold\n2 - добавить/убрать Italic\n3 - добавить/убрать Underline\nEnter - следующее задание");
                 consoleKey = Console.ReadKey();
 
@@ -73,13 +76,75 @@ namespace Task01
             Console.Clear();
 
             //Задание 7
-            Console.WriteLine($"\nЗадание № 7 - Случайный массив: мин, макс, сортировка, вывод на экран.");
+            Console.WriteLine("\nЗадание № 7 - Случайный массив: мин, макс, сортировка, вывод на экран.");
             Console.WriteLine(FunctionsLibrary.ArrayProcessing());
             Console.ReadKey();
 
+            //Задание 8
+            {
+                Console.WriteLine("\nЗадание 8");
+                int[,,] array = new int[r.Next(1, 10), r.Next(1, 10), r.Next(1, 10)];
 
+                int iLenght = array.GetLength(0);
+                int jLenght = array.GetLength(1);
+                int kLenght = array.GetLength(2);
 
-            
+                for (int i = 0; i < iLenght; i++)
+                {
+                    for (int j = 0; j < jLenght; j++)
+                    {
+                        for (int k = 0; k < kLenght; k++)
+                        {
+                            array[i, j, k] = r.Next(-100, 100);
+                        }
+                    }
+                }
+
+                Console.WriteLine(FunctionsLibrary.XYZArrayToString(array));
+                Console.WriteLine("Нажмите что-нибудь, чтобы удалить все положительные числа из массива.");
+                Console.ReadKey();
+                FunctionsLibrary.NoPositive(array);
+                Console.WriteLine(FunctionsLibrary.XYZArrayToString(array));
+                Console.WriteLine("Готово.");
+                Console.ReadKey();
+            }
+
+            //Задание 9
+            {
+                Console.WriteLine("\nЗадание 9 - сумма неотрицательных чисел в массиве.");
+                int[] array = new int[r.Next(10, 20)];
+                for(int i = 0; i < array.Length; i++)
+                {
+                    array[i] = r.Next(-100, 100);
+                }
+                Console.WriteLine(FunctionsLibrary.ArrayToString(array));
+                Console.WriteLine($"Сумма неотрицательных чисел для данного массива: {FunctionsLibrary.NonNegativSum(array)}");
+                Console.ReadKey();
+            }
+
+            //Задание 10
+            {
+                Console.WriteLine("\nЗадание 10 - сумма всех элементов с чётной суммой индексов в двумерном массиве.");
+                int[,] array = new int[r.Next(5, 10), r.Next(5, 10)];
+                int iLength = array.GetLength(0);
+                int jLength = array.GetLength(1);
+
+                for (int i = 0; i < iLength; i++)
+                {
+                    for (int j = 0; j < jLength; j++)
+                    {
+                        array[i, j] = r.Next(1,100);
+                    }
+                }
+                Console.WriteLine(FunctionsLibrary.XYArrayToString(array));
+                Console.WriteLine($"Cумма всех элементов с чётной суммой индексов для данного массива: {FunctionsLibrary.XYArrayEvenIndexesSum(array)}");
+                Console.ReadKey();
+            }
+
+            //Задание 11
+            {
+
+            }
         }
 
         //Функция безопасного ввода целых чисел
