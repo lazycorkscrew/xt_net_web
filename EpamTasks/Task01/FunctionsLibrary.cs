@@ -172,6 +172,63 @@ namespace Task01
             return sum;
         }
 
+        //Task 1.11
+        public static float AverageStringLength(string someString)
+        {
+            List<int> wordsLengths = new List<int>();
+            int counter = 0;
+            bool newWord = false;
+
+            foreach(char c in someString)
+            {
+                if( (char.IsSeparator(c) || char.IsPunctuation(c)) )
+                {
+                    if (counter > 0)
+                    {
+                        wordsLengths.Add(counter);
+                    }
+                    counter = 0;
+
+                }
+                else
+                {
+                    counter++;
+                }
+            }
+            return ((float)wordsLengths.Sum() / wordsLengths.Count);
+        }
+
+        //Task 1.12
+        public static string DoubleCharsInString(string someString, string charsNeedsDoubles)
+        {
+            StringBuilder builder = new StringBuilder(someString);
+            
+            foreach(char c in charsNeedsDoubles)
+            {
+                builder.Replace($"{c}", $"{c}{c}");
+            }
+
+            return builder.ToString();
+        }
+
+        public static string CheckChar(char c)
+        {
+            return $"IsControl:{char.IsControl(c)},\n"
+                +$"IsDigit:{char.IsDigit(c)},\n"
+                +$"IsHighSurrogate:{char.IsHighSurrogate(c)},\n"
+                +$"IsLetter:{char.IsLetter(c)},\n"
+                +$"IsLetterOrDigit:{char.IsLetterOrDigit(c)},\n"
+                +$"IsLower:{char.IsLower(c)},\n"
+                +$"IsLowSurrogate:{char.IsLowSurrogate(c)},\n"
+                +$"IsNumber:{char.IsNumber(c)},\n"
+                +$"IsPunctuation:{char.IsPunctuation(c)},\n"
+                +$"IsSeparator:{char.IsSeparator(c)},\n"
+                +$"IsSurrogate:{char.IsSurrogate(c)},\n"
+                +$"IsSymbol:{char.IsSymbol(c)},\n"
+                +$"IsUpper:{char.IsUpper(c)},\n"
+                +$"IsWhiteSpace:{char.IsWhiteSpace(c)}";
+        }
+
         public static string XYArrayToString(int[,] array)
         {
             int iLenght = array.GetLength(0);

@@ -21,13 +21,15 @@ namespace Task01
             Console.WriteLine("\nВот так-то лучше :) Итак, первое задание: вычислить площадь прямоугольника.");
 
             //Задание 1
-            Console.WriteLine("\nЗадание № 1 - Площадь прямоугольника.");
-            Console.WriteLine("Введите сторону А: ");
-            decimal a = TryReadLineDecimal();
-            Console.WriteLine("Введите сторону B: ");
-            decimal b = TryReadLineDecimal();
-            Console.WriteLine($"Площадь прямоугольника со сторонами {a} и {b} равна {a*b}.");
-            Console.ReadKey();
+            {
+                Console.WriteLine("\nЗадание № 1 - Площадь прямоугольника.");
+                Console.WriteLine("Введите сторону А: ");
+                decimal a = TryReadLineDecimal();
+                Console.WriteLine("Введите сторону B: ");
+                decimal b = TryReadLineDecimal();
+                Console.WriteLine($"Площадь прямоугольника со сторонами {a} и {b} равна {a*b}.");
+                Console.ReadKey();
+            }
 
             //Задание 2
             Console.WriteLine("\nЗадание № 2 - прямоугольный треугольник из звёздочек. Сколько строк вы хотите им занять?");
@@ -45,7 +47,7 @@ namespace Task01
             Console.ReadKey();
 
             //Задание 5
-            Console.WriteLine($"\nЗадание № 5 - Сумма всех чисел, кратных 3 и 5 равна : {FunctionsLibrary.SumOfNumbers()}");
+            Console.WriteLine($"\nЗадание № 5 - Сумма всех чисел от 1 до 1000, кратных 3 и 5 равна : {FunctionsLibrary.SumOfNumbers()}");
             Console.WriteLine();
             Console.ReadKey();
             
@@ -83,7 +85,7 @@ namespace Task01
             //Задание 8
             {
                 Console.WriteLine("\nЗадание 8");
-                int[,,] array = new int[r.Next(1, 10), r.Next(1, 10), r.Next(1, 10)];
+                int[,,] array = new int[r.Next(1, 4), r.Next(1, 10), r.Next(1, 10)];
 
                 int iLenght = array.GetLength(0);
                 int jLenght = array.GetLength(1);
@@ -143,7 +145,33 @@ namespace Task01
 
             //Задание 11
             {
+                Console.WriteLine("\nЗадание 11 - Средняя длина слов в введённой текстовой строке.");
+                Console.WriteLine("Введите строку, и я посчитаю среднюю длину всех её слов...");
+                Console.WriteLine($"{FunctionsLibrary.AverageStringLength(Console.ReadLine())}");
+                Console.ReadKey();
+            }
 
+            //Задание 12
+            {
+                Console.WriteLine("\nЗадание 12 - Дублирование символов.");
+                Console.WriteLine("Введите исходную строку...");
+                string firstString = Console.ReadLine();
+                Console.WriteLine("Введите строку символов для дублирования...");
+                Console.WriteLine(FunctionsLibrary.DoubleCharsInString(firstString, Console.ReadLine()));
+                Console.ReadKey();
+            }
+            
+            {
+                Console.WriteLine("\nНебольшой бонус: Нажимайте на клавиатуре любой символ, и я выведу о нём информацию...");
+                ConsoleKeyInfo c;
+                do
+                {
+                    c = Console.ReadKey();
+                    Console.Clear();
+                    Console.WriteLine(FunctionsLibrary.CheckChar(c.KeyChar));
+                }
+                while (c.Key != ConsoleKey.Enter);
+                
             }
         }
 
