@@ -44,8 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassLibrary\Employee.cs" />
+    <Compile Include="ClassLibrary\MyString.cs" />
     <Compile Include="ClassLibrary\Round.cs" />
     <Compile Include="ClassLibrary\Triangle.cs" />
+    <Compile Include="ClassLibrary\User.cs" />
+    <Compile Include="ClassLibrary\WorkSector\WorkProfession.cs" />
+    <Compile Include="ClassLibrary\WorkSector\WorkSector.cs" />
+    <Compile Include="ClassLibrary\WorkSector\WorkStage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

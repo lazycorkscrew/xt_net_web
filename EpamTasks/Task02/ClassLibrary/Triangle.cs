@@ -31,9 +31,15 @@ namespace Task02.ClassLibrary
 
         public Triangle(double a, double b, double c)
         {
-            this.a = (a > 0 ? a : Math.Abs(a));
-            this.b = (b > 0 ? b : Math.Abs(b));
-            this.c = (c > 0 ? c : Math.Abs(c));
+            if(a > b + c || b > a + c || c > a + b || a <= 0 || b <= 0 || c <= 0)
+            {
+                throw new ArgumentException("Каждый параметр должен быть положительным, и не больше суммы двух других.");
+            }
+
+            this.a = a;
+            this.b = b;
+            this.c = c;
+            
         }
     }
 }

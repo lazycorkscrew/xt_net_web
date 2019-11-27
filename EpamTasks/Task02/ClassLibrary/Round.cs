@@ -29,8 +29,13 @@ namespace Task02.ClassLibrary
         
         public Round(Point position, double r)
         {
+            if (r <= 0)
+            {
+                throw new ArgumentOutOfRangeException("r", "Радиус должен быть больше нуля.");
+            }
+
             this.position = position;
-            R = (r < 0? Math.Abs(r) : r);
+            R = r;
         }
     }
 }
