@@ -47,18 +47,16 @@ namespace Task02.ClassLibrary
         }
 
         //Общий стаж работы по данной сфере
-        public DateTime GetGeneralExperience()
+        public uint GetGeneralExperience()
         {
-            DateTime generalDateTime = new DateTime();
+            uint generalStage = 0;
 
             foreach(WorkProfession post in Profession)
             {
-                generalDateTime.AddYears(post.Stage.Year);
-                generalDateTime.AddMonths(post.Stage.Month);
-                generalDateTime.AddDays(post.Stage.Day);
+                generalStage += post.Stage;
             }
 
-            return generalDateTime;
+            return generalStage;
         }
 
         //Получить список областей и стаж по каждой области

@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ClassLibrary\Employee.cs" />
     <Compile Include="ClassLibrary\MyString.cs" />
+    <Compile Include="ClassLibrary\Ring.cs" />
     <Compile Include="ClassLibrary\Round.cs" />
     <Compile Include="ClassLibrary\Triangle.cs" />
     <Compile Include="ClassLibrary\User.cs" />

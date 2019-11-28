@@ -10,17 +10,17 @@ namespace Task02.ClassLibrary
     public class WorkProfession
     {
         public string ProfessionName { get; }
-        public DateTime Stage { get; }
+        public uint Stage { get; private set; }
 
-        public WorkProfession(string profession, DateTime stage = new DateTime())
+        public WorkProfession(string profession, uint stage = 0)
         {
             ProfessionName = profession;
             Stage = stage;
         }
 
-        public void IncreaseTheStage(int days)
+        public void IncreaseTheStage(uint days)
         {
-            Stage.AddDays(days);
+            Stage += days;
         }
     }
 }

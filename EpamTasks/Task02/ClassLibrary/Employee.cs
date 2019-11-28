@@ -19,7 +19,7 @@ namespace Task02.ClassLibrary
 
         }
 
-        public void IncreaseTheStage( string sector,  string profession, int days)
+        public void IncreaseTheStage( string sector,  string profession, uint days)
         {
             Stage[sector][profession].IncreaseTheStage(days);
         }
@@ -27,15 +27,15 @@ namespace Task02.ClassLibrary
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine($"{Fname} {Lname} {Patronymic}, дата рождения: {DateBirth}, должность: ");
+            builder.AppendLine($"{Fname} {Lname} {Patronymic}, дата рождения: {DateBirth.ToShortDateString()}, должность: ");
             
             foreach(WorkSector sector in Stage.Sectors)
             {
-                builder.AppendLine($"{sector.SectorName}, стаж: {sector.GetGeneralExperience()}");
+                builder.AppendLine($"{sector.SectorName}, общий стаж в днях: {sector.GetGeneralExperience()}");
 
                 foreach(WorkProfession prof in sector.Profession)
                 {
-                    builder.AppendLine($"\t{prof.ProfessionName}, стаж: {prof.Stage}");
+                    builder.AppendLine($"\t{prof.ProfessionName}, стаж в днях: {prof.Stage}.");
                 }
             }
 

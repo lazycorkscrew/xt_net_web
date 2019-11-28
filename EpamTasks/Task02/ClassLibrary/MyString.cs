@@ -67,7 +67,7 @@ namespace Task02.ClassLibrary
 
             for (int i = str1.Length; i < concated.Length; i++)
             {
-                concated[i] = str1[i - str1.Length];
+                concated[i] = str2[i - str1.Length];
             }
 
             return new MyString(concated);
@@ -120,15 +120,40 @@ namespace Task02.ClassLibrary
             return chars.GetHashCode();
         }
 
-        public int IndexOf(char c)
+        public int IndexOf(string s)
         {
-            for (int i = 0; i < chars.Length; i++)
+            int matchCount = 0;
+
+            try
             {
-                if (chars[i] == c)
+
+                for (int i = 0; i < chars.Length; i++)
                 {
-                    return i;
+                    int tempi = i;
+                    for (int j = 0; j < s.Length; j++)
+                    {
+                        if (chars[tempi] == s[j])
+                        {
+
+                            matchCount++;
+                            tempi++;
+                            if (s.Length == matchCount)
+                            {
+                                return i;
+                            }
+                        }
+                        else
+                        {
+                            matchCount = 0;
+                        }
+                    }
                 }
             }
+            catch(IndexOutOfRangeException)
+            {
+                return -1;
+            }
+
             return -1;
         }
     }

@@ -5,12 +5,12 @@ namespace Task02.ClassLibrary
 {
     public class Round
     {
-        public Point position { get; set; }
+        public Point Position { get; set; }
         private double _p;
         public double P { get { return _p; } }
 
-        private double _s;
-        public double S { get { return _s; } }
+        private double _area;
+        public double Area { get { return _area; } }
 
         private double _r;
         public double R
@@ -23,7 +23,7 @@ namespace Task02.ClassLibrary
             {
                 _r = (value < 0? Math.Abs(value) : value );
                 _p = 2 * Math.PI * _r;
-                _s = Math.PI * _r * _r;
+                _area = Math.PI * _r * _r;
             }
         }
         
@@ -34,7 +34,7 @@ namespace Task02.ClassLibrary
                 throw new ArgumentOutOfRangeException("r", "Радиус должен быть больше нуля.");
             }
 
-            this.position = position;
+            this.Position = position;
             R = r;
         }
     }

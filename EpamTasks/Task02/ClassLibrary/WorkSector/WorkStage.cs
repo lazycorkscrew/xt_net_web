@@ -57,19 +57,16 @@ namespace Task02.ClassLibrary
         }
 
         //Получить общий стаж по всем сферам
-        public DateTime GetGeneralExperience()
+        public uint GetGeneralExperience()
         {
-            DateTime generalDateTime = new DateTime();
+            uint generalStage = 0;
 
             foreach (WorkSector sector in Sectors)
             {
-                DateTime experience = sector.GetGeneralExperience();
-                generalDateTime.AddYears(experience.Year);
-                generalDateTime.AddMonths(experience.Month);
-                generalDateTime.AddDays(experience.Day);
+                generalStage += sector.GetGeneralExperience();
             }
 
-            return generalDateTime;
+            return generalStage;
         }
 
 

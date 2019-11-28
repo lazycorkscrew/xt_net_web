@@ -14,13 +14,13 @@ namespace Task02
 
         static void Main(string[] args)
         {
-            /*//Task 2.1 Класс Round с координатами, радиусом и т.д.
+            //Task 2.1 Класс Round с координатами, радиусом и т.д.
             TryCatchAndWriteExceptions(delegate
             {
                 Console.WriteLine("Введите радиус окружности.");
                 ClassLibrary.Round round;
                 round = new ClassLibrary.Round(new Point(0, 0), TryReadLineDecimal());
-                Console.WriteLine($"P = {round.P}, S = {round.S}");
+                Console.WriteLine($"P = {round.P}, S = {round.Area}");
                 Console.ReadKey();
             });
 
@@ -48,20 +48,33 @@ namespace Task02
                 Console.ReadKey();
             });
 
-            MyString s = new MyString("строка");
-            MyString concatedString = s + s;
+            //Task 2.4 Своя строка и операции с ней
+            Console.WriteLine("Введите первую строку..");
+            MyString s1 = new MyString(Console.ReadLine());
+            Console.WriteLine("Введите вторую строку..");
+            MyString s2 = new MyString(Console.ReadLine());
+            Console.WriteLine($"Результат конкатенации: {s1 + s2}");
             
+            Console.ReadKey();
+            Console.WriteLine("Введите строку, в которой будем искать..");
+            MyString checkString = new MyString(Console.ReadLine());
 
-            foreach(char c in concatedString)
-            {
-                Console.Write(c);
-            }
-            Console.ReadKey();*/
+            Console.WriteLine("Введите строку, которую ищем в предыдущей строке..");
+            MyString stringForFind = new MyString(Console.ReadLine());
+            int result = checkString.IndexOf(stringForFind.ToString());
+            string answer = result >= 0 ? $"имеет индекс {result}" : "не найдена";
+            Console.WriteLine( $"Строка {answer}");
+            Console.ReadKey();
 
+            
             Employee people = new Employee("Гришин", "Максим", "Юрьевич", DateTime.Parse("22.06.1995"), new WorkStage());
-
             people.Stage.AddSector(new WorkSector("IT"));
-            people.Stage["IT"].AddWorkProfession(new WorkProfession(".NET Программист", new DateTime(1, 1, 1)) );
+            people.Stage["IT"].AddWorkProfession(new WorkProfession(".NET Программист", 319));
+
+            people.Stage.AddSector(new WorkSector("Продажи"));
+            people.Stage["Продажи"].AddWorkProfession(new WorkProfession("Продавец-консультант в Красное и Белое", 8));
+            people.Stage["Продажи"].AddWorkProfession(new WorkProfession("Продавец-консультант в салоне связи", 94));
+
             Console.WriteLine(people.ToString());
             Console.ReadKey();
         }
