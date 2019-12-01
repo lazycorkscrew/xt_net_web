@@ -14,83 +14,98 @@ namespace Task02
 
         static void Main(string[] args)
         {
-            /*
+            
             //Task 2.1 Класс Round с координатами, радиусом и т.д.
             TryCatchAndWriteExceptions(delegate
             {
+                Console.WriteLine("\nTask 2.1");
                 Console.WriteLine("Введите радиус окружности.");
                 ClassLibrary.Round round;
                 round = new ClassLibrary.Round(new Point(0, 0), TryReadLineDecimal());
                 Console.WriteLine($"P = {round.P}, S = {round.Area}");
                 Console.ReadKey();
+                Console.Clear();
             });
 
             //Task 2.2 Класс Triangle (треугольник) с длинами.
             TryCatchAndWriteExceptions(delegate
             {
+                Console.WriteLine("\nTask 2.2");
                 Console.WriteLine("Введите последовательно три стороны треугольника.");
                 ClassLibrary.Triangle triangle = new ClassLibrary.Triangle(TryReadLineDecimal(), TryReadLineDecimal(), TryReadLineDecimal());
                 Console.WriteLine($"P = {triangle.P}, S = {triangle.S}");
                 Console.ReadKey();
+                Console.Clear();
             });
 
             //Task 2.3 Класс User (пользователь).
             TryCatchAndWriteExceptions(delegate
             {
+                Console.WriteLine("\nTask 2.3");
                 Console.WriteLine("Введите имя");
                 string fname = Console.ReadLine();
                 Console.WriteLine("Введите фамилию");
                 string lname = Console.ReadLine();
                 Console.WriteLine("Введите отчество");
                 string patronymic = Console.ReadLine();
+                Console.WriteLine("Введите дату рождения");
                 DateTime dateBirth = TryReadDateTime();
                 User user = new User(fname, lname, patronymic, dateBirth);
                 Console.WriteLine(user.ToString());
                 Console.ReadKey();
+                Console.Clear();
             });
 
             //Task 2.4 Своя строка и операции с ней
-            Console.WriteLine("Введите первую строку..");
-            MyString s1 = new MyString(Console.ReadLine());
-            Console.WriteLine("Введите вторую строку..");
-            MyString s2 = new MyString(Console.ReadLine());
-            Console.WriteLine($"Результат конкатенации: {s1 + s2}");
-            
-            Console.ReadKey();
-            Console.WriteLine("Введите строку, в которой будем искать..");
-            MyString checkString = new MyString(Console.ReadLine());
+            {
+                Console.WriteLine("\nTask 2.4");
+                Console.WriteLine("Введите первую строку..");
+                MyString s1 = new MyString(Console.ReadLine());
+                Console.WriteLine("Введите вторую строку..");
+                MyString s2 = new MyString(Console.ReadLine());
+                Console.WriteLine($"Результат конкатенации: {s1 + s2}");
 
-            Console.WriteLine("Введите строку, которую ищем в предыдущей строке..");
-            MyString stringForFind = new MyString(Console.ReadLine());
-            int result = checkString.IndexOf(stringForFind.ToString());
-            string answer = result >= 0 ? $"имеет индекс {result}" : "не найдена";
-            Console.WriteLine( $"Строка {answer}");
-            Console.ReadKey();
+                Console.ReadKey();
+                Console.WriteLine("Введите строку, в которой будем искать..");
+                MyString checkString = new MyString(Console.ReadLine());
+
+                Console.WriteLine("Введите строку, которую ищем в предыдущей строке..");
+                MyString stringForFind = new MyString(Console.ReadLine());
+                int result = checkString.IndexOf(stringForFind.ToString());
+                string answer = result >= 0 ? $"имеет индекс {result}" : "не найдена";
+                Console.WriteLine($"Строка {answer}");
+                Console.ReadKey();
+                Console.Clear();
+            }
 
             //Task 2.5 Сотрудник
-            Console.WriteLine("Task 2.5 Employee.");
-            Employee people = new Employee("Гришин", "Максим", "Юрьевич", DateTime.Parse("22.06.1995"), new WorkStage());
-            people.Stage.AddSector(new WorkSector("IT"));
-            people.Stage["IT"].AddWorkProfession(new WorkProfession(".NET C# Программист", 319));
+            {
+                Console.WriteLine("\nTask 2.5 Employee.");
+                Employee people = new Employee("Гришин", "Максим", "Юрьевич", DateTime.Parse("22.06.1995"), new WorkStage());
+                people.Stage.AddSector(new WorkSector("IT"));
+                people.Stage["IT"].AddWorkProfession(new WorkProfession(".NET C# Программист", 319));
 
-            people.Stage.AddSector(new WorkSector("Продажи"));
-            people.Stage["Продажи"].AddWorkProfession(new WorkProfession("Продавец-консультант в магазине", 8));
-            people.Stage["Продажи"].AddWorkProfession(new WorkProfession("Продавец-консультант в салоне связи", 94));
+                people.Stage.AddSector(new WorkSector("Продажи"));
+                people.Stage["Продажи"].AddWorkProfession(new WorkProfession("Продавец-консультант в магазине", 8));
+                people.Stage["Продажи"].AddWorkProfession(new WorkProfession("Продавец-консультант в салоне связи", 94));
 
-            Console.WriteLine(people.ToString());
-            Console.ReadKey();*/
+                Console.WriteLine(people.ToString());
+                Console.ReadKey();
+                Console.Clear();
+            }
 
             //Task 2.6
             {
-                Console.WriteLine("Task 2.6 Ring.");
+                Console.WriteLine("\nTask 2.6 Ring.");
                 Ring ring = new Ring(new Round(new Point(0, 0), 4), new Round(new Point(0, 0), 10), new Point(0, 0), Color.Green);
                 Console.WriteLine(ring.ToString());
                 Console.ReadKey();
+                Console.Clear();
             }
 
             //Task 2.7
             {
-                Console.WriteLine("Task 2.7 VectorEditor.");
+                Console.WriteLine("\nTask 2.7 VectorEditor.");
                 WorkSpace space = new WorkSpace(800, 600);
                 space.Figures.Add(new Line(new Point(57, 89), new Point(98, 72)));
                 space.Figures.Add(new Round(new Point(100, 100), 80));
@@ -105,11 +120,12 @@ namespace Task02
                 BitmapShower shower = new BitmapShower(space.Render());
                 shower.ShowDialog();
                 Console.ReadKey();
+                Console.Clear();
             }
 
             //Task 2.8
             {
-                Console.WriteLine("\nЗадание 2.8. Сейчас я выведу на консоль информацию об игровом поле вместе с объектами на нём.");
+                Console.WriteLine("\nTask 2.8. Сейчас я выведу на консоль информацию об игровом поле вместе с объектами на нём.");
                 GameField gameField = new GameField(200, 200);
                 Size size = new Size(40, 40);
                 gameField.SetPlayer(new Player(3, new Point(100,61), size));
@@ -121,10 +137,7 @@ namespace Task02
 
                 Console.WriteLine(gameField.ToString());
                 Console.ReadKey();
-
             }
-
-
         }
 
 
