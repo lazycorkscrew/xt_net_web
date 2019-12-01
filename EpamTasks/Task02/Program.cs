@@ -14,6 +14,7 @@ namespace Task02
 
         static void Main(string[] args)
         {
+            /*
             //Task 2.1 Класс Round с координатами, радиусом и т.д.
             TryCatchAndWriteExceptions(delegate
             {
@@ -66,17 +67,64 @@ namespace Task02
             Console.WriteLine( $"Строка {answer}");
             Console.ReadKey();
 
-            
+            //Task 2.5 Сотрудник
+            Console.WriteLine("Task 2.5 Employee.");
             Employee people = new Employee("Гришин", "Максим", "Юрьевич", DateTime.Parse("22.06.1995"), new WorkStage());
             people.Stage.AddSector(new WorkSector("IT"));
-            people.Stage["IT"].AddWorkProfession(new WorkProfession(".NET Программист", 319));
+            people.Stage["IT"].AddWorkProfession(new WorkProfession(".NET C# Программист", 319));
 
             people.Stage.AddSector(new WorkSector("Продажи"));
-            people.Stage["Продажи"].AddWorkProfession(new WorkProfession("Продавец-консультант в Красное и Белое", 8));
+            people.Stage["Продажи"].AddWorkProfession(new WorkProfession("Продавец-консультант в магазине", 8));
             people.Stage["Продажи"].AddWorkProfession(new WorkProfession("Продавец-консультант в салоне связи", 94));
 
             Console.WriteLine(people.ToString());
-            Console.ReadKey();
+            Console.ReadKey();*/
+
+            //Task 2.6
+            {
+                Console.WriteLine("Task 2.6 Ring.");
+                Ring ring = new Ring(new Round(new Point(0, 0), 4), new Round(new Point(0, 0), 10), new Point(0, 0), Color.Green);
+                Console.WriteLine(ring.ToString());
+                Console.ReadKey();
+            }
+
+            //Task 2.7
+            {
+                Console.WriteLine("Task 2.7 VectorEditor.");
+                WorkSpace space = new WorkSpace(800, 600);
+                space.Figures.Add(new Line(new Point(57, 89), new Point(98, 72)));
+                space.Figures.Add(new Round(new Point(100, 100), 80));
+                space.Figures.Add(new Round(new Point(300, 100), 80, true));
+                space.Figures.Add(new ClassLibrary.Rectangle(new Point(500, 100), 80, 40));
+                space.Figures.Add(new Ring(new Round(new Point(400, 100), 80), -24, new Point(550, 100)));
+
+                Console.WriteLine(space.ToString());
+
+                Console.WriteLine("\nСейчас откроется окно с прорисовкой некоторымх элементов. Нажмите любую клавишу...");
+                Console.ReadKey();
+                BitmapShower shower = new BitmapShower(space.Render());
+                shower.ShowDialog();
+                Console.ReadKey();
+            }
+
+            //Task 2.8
+            {
+                Console.WriteLine("\nЗадание 2.8. Сейчас я выведу на консоль информацию об игровом поле вместе с объектами на нём.");
+                GameField gameField = new GameField(200, 200);
+                Size size = new Size(40, 40);
+                gameField.SetPlayer(new Player(3, new Point(100,61), size));
+                gameField.AddGameObject(new Enemy(new Point(100, 100), size));
+                gameField.AddGameObject(new Block(new Point(100, 150), size));
+                gameField.AddGameObject(new Bonus(new Point(150, 60), size, BonusType.Life, 1));
+
+                Console.WriteLine(gameField.GamePlayer.IsCollide(gameField.GameObjects[0])? "Игрок и первый объект сталкиваются.": "Игрок и первый объект не сталкиваются.");
+
+                Console.WriteLine(gameField.ToString());
+                Console.ReadKey();
+
+            }
+
+
         }
 
 

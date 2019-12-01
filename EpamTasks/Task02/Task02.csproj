@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,12 +45,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitmapShower.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BitmapShower.Designer.cs">
+      <DependentUpon>BitmapShower.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClassLibrary\Employee.cs" />
+    <Compile Include="ClassLibrary\Figures\DoublePoint.cs" />
+    <Compile Include="ClassLibrary\Figures\Figure.cs" />
+    <Compile Include="ClassLibrary\Figures\Line.cs" />
+    <Compile Include="ClassLibrary\Figures\Rectangle.cs" />
+    <Compile Include="ClassLibrary\GameEntities\GameObjects\Block.cs" />
+    <Compile Include="ClassLibrary\GameEntities\GameObjects\Bonus.cs" />
+    <Compile Include="ClassLibrary\GameEntities\GameObjects\Enemy.cs" />
+    <Compile Include="ClassLibrary\GameEntities\GameField.cs" />
+    <Compile Include="ClassLibrary\GameEntities\GameObject.cs" />
+    <Compile Include="ClassLibrary\GameEntities\GameObjects\Player.cs" />
     <Compile Include="ClassLibrary\MyString.cs" />
-    <Compile Include="ClassLibrary\Ring.cs" />
-    <Compile Include="ClassLibrary\Round.cs" />
-    <Compile Include="ClassLibrary\Triangle.cs" />
+    <Compile Include="ClassLibrary\Figures\Ring.cs" />
+    <Compile Include="ClassLibrary\Figures\Round.cs" />
+    <Compile Include="ClassLibrary\Figures\Triangle.cs" />
     <Compile Include="ClassLibrary\User.cs" />
+    <Compile Include="ClassLibrary\VectorEditor\WorkSpace.cs" />
     <Compile Include="ClassLibrary\WorkSector\WorkProfession.cs" />
     <Compile Include="ClassLibrary\WorkSector\WorkSector.cs" />
     <Compile Include="ClassLibrary\WorkSector\WorkStage.cs" />
@@ -58,6 +76,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BitmapShower.resx">
+      <DependentUpon>BitmapShower.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ClassLibrary\GameEntities\GameObjects\Bonuses\" />
+    <Folder Include="ClassLibrary\GameEntities\GameObjects\Enemies\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
