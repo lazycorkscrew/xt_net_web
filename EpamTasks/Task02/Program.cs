@@ -14,7 +14,18 @@ namespace Task02
 
         static void Main(string[] args)
         {
-            
+            Task1();
+            Task2();
+            Task3();
+            Task4();
+            Task5();
+            Task6();
+            Task7();
+            Task8();
+        }
+
+        public static void Task1()
+        {
             //Task 2.1 Класс Round с координатами, радиусом и т.д.
             TryCatchAndWriteExceptions(delegate
             {
@@ -26,7 +37,10 @@ namespace Task02
                 Console.ReadKey();
                 Console.Clear();
             });
+        }
 
+        public static void Task2()
+        {
             //Task 2.2 Класс Triangle (треугольник) с длинами.
             TryCatchAndWriteExceptions(delegate
             {
@@ -37,7 +51,10 @@ namespace Task02
                 Console.ReadKey();
                 Console.Clear();
             });
+        }
 
+        public static void Task3()
+        {
             //Task 2.3 Класс User (пользователь).
             TryCatchAndWriteExceptions(delegate
             {
@@ -55,7 +72,10 @@ namespace Task02
                 Console.ReadKey();
                 Console.Clear();
             });
+        }
 
+        public static void Task4()
+        {
             //Task 2.4 Своя строка и операции с ней
             {
                 Console.WriteLine("\nTask 2.4");
@@ -77,7 +97,10 @@ namespace Task02
                 Console.ReadKey();
                 Console.Clear();
             }
+        }
 
+        public static void Task5()
+        {
             //Task 2.5 Сотрудник
             {
                 Console.WriteLine("\nTask 2.5 Employee.");
@@ -93,7 +116,10 @@ namespace Task02
                 Console.ReadKey();
                 Console.Clear();
             }
+        }
 
+        public static void Task6()
+        {
             //Task 2.6
             {
                 Console.WriteLine("\nTask 2.6 Ring.");
@@ -102,7 +128,10 @@ namespace Task02
                 Console.ReadKey();
                 Console.Clear();
             }
+        }
 
+        public static void Task7()
+        {
             //Task 2.7
             {
                 Console.WriteLine("\nTask 2.7 VectorEditor.");
@@ -122,24 +151,26 @@ namespace Task02
                 Console.ReadKey();
                 Console.Clear();
             }
+        }
 
+        public static void Task8()
+        {
             //Task 2.8
             {
                 Console.WriteLine("\nTask 2.8. Сейчас я выведу на консоль информацию об игровом поле вместе с объектами на нём.");
                 GameField gameField = new GameField(200, 200);
                 Size size = new Size(40, 40);
-                gameField.SetPlayer(new Player(3, new Point(100,61), size));
+                gameField.SetPlayer(new Player(3, new Point(100, 61), size));
                 gameField.AddGameObject(new Enemy(new Point(100, 100), size));
                 gameField.AddGameObject(new Block(new Point(100, 150), size));
                 gameField.AddGameObject(new Bonus(new Point(150, 60), size, BonusType.Life, 1));
 
-                Console.WriteLine(gameField.GamePlayer.IsCollide(gameField.GameObjects[0])? "Игрок и первый объект сталкиваются.": "Игрок и первый объект не сталкиваются.");
+                Console.WriteLine(gameField.GamePlayer.IsCollide(gameField.GameObjects[0]) ? "Игрок и первый объект сталкиваются." : "Игрок и первый объект не сталкиваются.");
 
                 Console.WriteLine(gameField.ToString());
                 Console.ReadKey();
             }
         }
-
 
         public static void TryCatchAndWriteExceptions(YourCode code)
         {
