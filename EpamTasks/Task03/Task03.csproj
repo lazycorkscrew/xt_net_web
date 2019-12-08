@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\CycledDynamicArray.cs" />
     <Compile Include="Entities\DynamicArray.cs" />
     <Compile Include="Entities\Roundelay.cs" />
     <Compile Include="Entities\EntitiesCounter.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Task03
 {
@@ -48,20 +49,41 @@ namespace Task03
 
         static void Task3()
         {
+            Console.WriteLine("Задание 3: свой динамический массив, и бесконечный динамический массив.");
             DynamicArray<string> array = new DynamicArray<string>();
-
-            /*for(int i = 0; i < 79; i++)
-            {
-                array.Add(i.ToString());
-                Console.WriteLine($"{array.Capacity} {array.Length}");
-            }*/
-
+            
 
             array.AddRange(new string[] { "12", "23", "34", "45", "56", "67", "78", "89", "90", "011", "012", "013", "014", "015", "016", "017", "018","019" });
+            CycledDynamicArray<string> array2 = new CycledDynamicArray<string>(array);//(array.Clone() as CycledDynamicArray<string>);
+            //array2.AddRange(new string[] { "12", "23", "34", "45", "56", "67", "78", "89", "90", "011", "012", "013", "014", "015", "016", "017", "018", "019" });
 
-            array.Remove("90");
-            array.Insert("90", 17);
-            Console.WriteLine($"{array.Capacity} {array.Length}");
+            array2.AddRange(array2);
+
+            IEnumerable<string> ienumArray = array2;
+
+            foreach(string item in ienumArray)
+            {
+                Console.WriteLine(item);
+            }
+
+            //array2.AddRange(array2);
+            //array2.Remove("90");
+            //array.Insert("90", 17);
+            //Console.WriteLine($"{array.Capacity} {array.Length}");
+            //Console.WriteLine($"{array2.Capacity} {array2.Length}");
+            //Console.WriteLine(array[-20]);
+
+            int limit = 100;
+            int iteration = 1;
+            /*foreach(string value in array)
+            {
+                Console.WriteLine(value);
+                if(iteration++ >= limit)
+                {
+                    break;
+                }
+            }*/
+
             Console.ReadKey();
         }
 

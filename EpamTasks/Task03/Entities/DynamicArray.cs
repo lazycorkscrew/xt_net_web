@@ -7,19 +7,25 @@ using System.Threading.Tasks;
 
 namespace Task03
 {
-    public class DynamicArray<T> : IEnumerable, IEnumerable<T>
+    public class DynamicArray<T> : IEnumerable<T>, IEnumerator<T>
     {
-        private int _minCapacity = 8;
-        private T[] _array;
-        private int _length = 0;
+        protected static int _minCapacity = 8;
+        protected T[] _array;
+        protected int _length = 0;
+        protected int _position = -1;
 
         public T this[int index]
         {
             get
             {
-                if (index < 0 || index >= _length)
+                if(index < 0)
                 {
-                    throw new ArgumentOutOfRangeException();
+                    index += _length;
+                }
+
+                if (index >= _length)
+                {
+                    throw new IndexOutOfRangeException();
                 }
 
                 return _array[index];
@@ -27,9 +33,14 @@ namespace Task03
 
             set
             {
-                if (index < 0 || index >= _length)
+                if (index < 0)
                 {
-                    throw new ArgumentOutOfRangeException();
+                    index += _length;
+                }
+
+                if (index >= _length)
+                {
+                    throw new IndexOutOfRangeException();
                 }
                 _array[index] = value;
             }
@@ -48,6 +59,45 @@ namespace Task03
             get
             {
                 return _array.Length;
+            }
+
+            set
+            {
+                T[] newArray = new T[value];
+                try
+                {
+                    for (int i = 0; i < value; i++)
+                    {
+                        newArray[i] = _array[i];
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    
+                }
+
+                if (value < _array.Length)
+                    _length = newArray.Length;
+
+                _array = newArray;
+
+                
+            }
+        }
+
+        public T Current
+        {
+            get
+            {
+                return _array[_position];
+            }
+        }
+
+        object IEnumerator.Current
+        {
+            get
+            {
+                return _array[_position];
             }
         }
 
@@ -73,7 +123,7 @@ namespace Task03
             _length--;
         }
 
-        private void Expand(int newElementsCount = 1)
+        protected void Expand(int newElementsCount = 1)
         {
             int newCapacity = _minCapacity;
 
@@ -107,7 +157,22 @@ namespace Task03
 
         public void AddRange(IEnumerable<T> items)
         {
-            T[] arrayToAdd = items.ToArray();
+            CycledDynamicArray<T> cda = (items as CycledDynamicArray<T>);
+
+            int count = (cda != null ? count = cda.Count() : items.Count());
+
+            T[] arrayToAdd = new T[count];
+
+            int j = 0;
+            foreach (T item in items)
+            {
+                arrayToAdd[j++] = item;
+                if(j == count)
+                {
+                    break;
+                }
+            }
+            
             int arrayToAddLength = arrayToAdd.Length;
             
             Expand(arrayToAddLength);
@@ -151,28 +216,86 @@ namespace Task03
                 throw new ArgumentOutOfRangeException();
             }
 
-
-            Add(item);
-            T tempItem;
-
-            for(int i = _length-1; i > index; i--)
+            try
             {
-                tempItem = _array[i-1];
-                _array[i - 1] = _array[i];
-                _array[i] = tempItem;
-            }
+                Add(item);
+                T tempItem;
 
+                for (int i = _length - 1; i > index; i--)
+                {
+                    tempItem = _array[i - 1];
+                    _array[i - 1] = _array[i];
+                    _array[i] = tempItem;
+                }
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+            
             return true;
         }
 
         public IEnumerator GetEnumerator()
         {
-            return _array.GetEnumerator();
+            return this as IEnumerator;
         }
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            return ((IEnumerable<T>)_array).GetEnumerator();
+            return GetEnumerator() as IEnumerator<T>;
+        }
+
+        public object Clone()
+        {
+            T[] newArray = new T[_array.Length];
+
+            for(int i = 0; i < _array.Length; i++)
+            {
+                newArray[i] = _array[i];
+            }
+
+            return new DynamicArray<T> {_array = newArray, _length = _length };
+        }
+
+        public T[] ToArray()
+        {
+            T[] newArray = new T[_length];
+
+            for(int i = 0; i < _length; i++)
+            {
+                newArray[i] = _array[i];
+            }
+
+            return newArray;
+        }
+
+        public static implicit operator T [] (DynamicArray<T> array)
+        {
+            T[] newArray = new T[array._length];
+
+            for (int i = 0; i < array._length; i++)
+            {
+                newArray[i] = array._array[i];
+            }
+
+            return newArray;
+        }
+
+        public bool MoveNext()
+        {
+            return (_position++ < _length - 1);
+            
+        }
+
+        public void Reset()
+        {
+            _position = -1;
+        }
+
+        public void Dispose()
+        {
+            Reset();
         }
     }
 }
