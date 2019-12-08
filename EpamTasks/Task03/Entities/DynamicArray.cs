@@ -125,6 +125,7 @@ namespace Task03
                 if(_array[i].Equals(item))
                 {
                     RemoveAt(i);
+                    return true;
                 }
             }
 
@@ -141,6 +142,27 @@ namespace Task03
             }
 
             _length--;
+        }
+
+        public bool Insert(T item, int index)
+        {
+            if(index > _length)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+
+            Add(item);
+            T tempItem;
+
+            for(int i = _length-1; i > index; i--)
+            {
+                tempItem = _array[i-1];
+                _array[i - 1] = _array[i];
+                _array[i] = tempItem;
+            }
+
+            return true;
         }
 
         public IEnumerator GetEnumerator()

@@ -39,7 +39,7 @@ namespace Task03
 
         static void Task2()
         {
-            Console.WriteLine("Задание 2: Введите какое-нибудь английское предложение, а я посчитаю в нём количество уникальных слов.");
+            Console.WriteLine("Задание 2: Введите какое-нибудь английское предложение, а я посчитаю в нём количество одинаковых слов.");
             EntitiesCounter<string> stringsCounter = new EntitiesCounter<string>();
             stringsCounter.AddRange(Console.ReadLine().Split(new char[] { '.', ' ' }, StringSplitOptions.RemoveEmptyEntries));
             Console.WriteLine(stringsCounter.ToString());
@@ -60,6 +60,7 @@ namespace Task03
             array.AddRange(new string[] { "12", "23", "34", "45", "56", "67", "78", "89", "90", "011", "012", "013", "014", "015", "016", "017", "018","019" });
 
             array.Remove("90");
+            array.Insert("90", 17);
             Console.WriteLine($"{array.Capacity} {array.Length}");
             Console.ReadKey();
         }
