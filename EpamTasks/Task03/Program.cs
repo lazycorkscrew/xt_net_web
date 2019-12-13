@@ -51,7 +51,6 @@ namespace Task03
         {
             Console.WriteLine("Задание 3: свой динамический массив, и бесконечный динамический массив.");
             DynamicArray<string> array = new DynamicArray<string>();
-            
 
             array.AddRange(new string[] { "12", "23", "34", "45", "56", "67", "78", "89", "90", "011", "012", "013", "014", "015", "016", "017", "018","019" });
             CycledDynamicArray<string> array2 = new CycledDynamicArray<string>(array);//(array.Clone() as CycledDynamicArray<string>);
