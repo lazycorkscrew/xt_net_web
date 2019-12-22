@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Task05
 {
-    public enum StringChangeType
+    public enum FileChangeType
     {
-        Insert = 1,
+        Create = 1,
         Update = 2,
-        Delete = 3,
+        Delete = 3
     }
 }
