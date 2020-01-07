@@ -8,6 +8,7 @@ namespace EpamTasks.IDAC
 {
     public interface IFileAccessorContracts
     {
-
+        bool SaveSerializedObject(object target, string fileName);
+        T loadSerializedObject<T>(string fileName);
     }
 }

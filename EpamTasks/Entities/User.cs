@@ -12,5 +12,6 @@ namespace EpamTasks.Entities
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int Age { get; set; }
+        public KeyValuePair<string, int>[] Awards { get; set; }
     }
 }

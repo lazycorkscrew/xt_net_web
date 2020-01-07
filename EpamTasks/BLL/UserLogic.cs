@@ -29,7 +29,7 @@ namespace EpamTasks.BLL
         {
             try
             {
-                return users.RemoveAt(id);
+                return users.RemoveUserAt(id);
             }
             catch (ArgumentException)
             {
@@ -44,8 +44,40 @@ namespace EpamTasks.BLL
 
         public bool LoadFromFile()
         {
-            return false;
+            try
+            {
+                users = DataAccessProvider.FileAccessor.loadSerializedObject<Users>("UsersInfo.txt");
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
 
+        public bool SaveInFile()
+        {
+            return DataAccessProvider.FileAccessor.SaveSerializedObject(users, "UsersInfo.txt");
+        }
+
+        public Dictionary<int, string> GetAwards()
+        {
+            return users.Awards;
+        }
+
+        public Dictionary<int, string> GetAwardsByUserId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddNewAward(string awardName)
+        {
+            return users.AddNewAward(awardName);
+        }
+
+        public bool RemoveAward(int awardId)
+        {
+            return users.RemoveAward(awardId);
+        }
     }
 }

@@ -13,26 +13,29 @@ namespace Task06
         static void Main(string[] args)
         {
             Console.WriteLine("Добро пожаловать на реализацию 6-го таска \"Users\"\n");
+            LogicProvider.UserLogic.LoadFromFile();
             while(Menu())
             {
-                Console.ReadKey();
                 Console.Clear();
             }
         }
 
         public static bool Menu()
         {
-            Console.WriteLine("1 - Добавить пользователя {0}"+
+            Console.WriteLine("1 - Добавить пользователя{0}"+
                                 "2 - Удалить пользователя{0}"+
                                 "3 - Вывести список пользователей на экран{0}"+
-                                "4 - Выход", Environment.NewLine);
-            char key = Console.ReadKey(true).KeyChar;
-            switch(key)
+                                "4 - Вручить награду{0}" +
+                                "5 - Редактор наград{0}" +
+                                "6 - Выход", Environment.NewLine);
+            switch(Console.ReadKey(true).KeyChar)
             {
                 case '1': AddUser(); break;
                 case '2': RemoveUser(); break;
                 case '3': ShowAllUsers(); break;
-                case '4': return false;
+                case '4': ; break;
+                case '5': AwardsEditor(); break;
+                case '6': return false;
                 default: break;
             }
 
@@ -42,14 +45,17 @@ namespace Task06
         public static void AddUser()
         {
             Console.Clear();
-            if(LogicProvider.UserLogic.AddUser(EnterTheNameForce(), EnterTheBirthDateTimeForce()))
+            if(LogicProvider.UserLogic.AddUser(EnterTheNameForce("Введите имя пользователя."), EnterTheBirthDateTimeForce()))
             {
+                LogicProvider.UserLogic.SaveInFile();
                 Console.WriteLine("Пользователь добавлен.");
             }
             else
             {
                 Console.WriteLine("Произошла ошибка добавления. Пожалуйста, свяжитесь с администратором.");
             }
+
+            Console.ReadKey();
         }
 
         public static void RemoveUser()
@@ -58,6 +64,7 @@ namespace Task06
             Console.WriteLine("Введите ID удаляемого пользователя: ");
             if (LogicProvider.UserLogic.RemoveUserAt(EnterTheIdForce()))
             {
+                LogicProvider.UserLogic.SaveInFile();
                 Console.WriteLine("Пользователь удалён.");
             }
             else
@@ -65,6 +72,7 @@ namespace Task06
                 Console.WriteLine("Пользователь не найден.");
             }
 
+            Console.ReadKey();
         }
 
         public static void ShowAllUsers()
@@ -79,11 +87,88 @@ namespace Task06
             }
 
             Console.WriteLine(builder.ToString());
+            Console.ReadKey();
         }
 
-        public static string EnterTheNameForce()
+        public static bool GiveAnAward()
         {
-            Console.WriteLine("Введите имя пользователя.");
+            return false;
+        }
+
+        public static bool AwardsMenu()
+        {
+            Console.WriteLine("1 - Добавить награду{0}" +
+                                "2 - Удалить награду{0}" +
+                                "3 - Вывести список возможных наград на экран{0}" +
+                                "4 - Назад{0}", Environment.NewLine);
+            switch (Console.ReadKey(true).KeyChar)
+            {
+                case '1': AddNewAward(); break;
+                case '2': RemoveAward(); break;
+                case '3': ShowAwards(); Console.ReadKey(); break;
+                case '4': return false;
+                default: break;
+            }
+
+            return true;
+        }
+
+        public static void AwardsEditor()
+        {
+            Console.Clear();
+            while (AwardsMenu())
+            {
+                Console.Clear();
+            }
+        }
+
+        public static void AddNewAward()
+        {
+            if(LogicProvider.UserLogic.AddNewAward(EnterTheNameForce("Введите название новой награды:")))
+            {
+                LogicProvider.UserLogic.SaveInFile();
+                Console.WriteLine("Новая награда добавлена.");
+            }
+            else
+            {
+                Console.WriteLine("Такая награда уже существует.");
+            }
+
+            Console.ReadKey();
+        }
+
+        public static void RemoveAward()
+        {
+            ShowAwards();
+            Console.WriteLine("Введите ID удаляемой награды:");
+            
+
+            if (LogicProvider.UserLogic.RemoveAward(EnterTheIdForce()))
+            {
+                LogicProvider.UserLogic.SaveInFile();
+                Console.WriteLine("Награда удалена.");
+            }
+            else
+            {
+                Console.WriteLine("Такая награда не существует.");
+            }
+
+            Console.ReadKey();
+        }
+
+        public static void ShowAwards()
+        {
+            //Console.Clear();
+            Dictionary<int, string> awards = LogicProvider.UserLogic.GetAwards();
+            foreach (KeyValuePair<int, string> award in awards)
+            {
+                Console.WriteLine($"{award.Key} {award.Value}");
+            }
+        }
+
+        public static string EnterTheNameForce(string message)
+        {
+            Console.WriteLine(message);
             return Console.ReadLine();
         }
 

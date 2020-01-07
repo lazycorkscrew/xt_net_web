@@ -13,5 +13,10 @@ namespace EpamTasks.IBLC
         bool RemoveUserAt(int id);
         User[] GetArray();
         bool LoadFromFile();
+        bool SaveInFile();
+        Dictionary<int, string> GetAwards();
+        Dictionary<int, string> GetAwardsByUserId();
+        bool AddNewAward(string awardName);
+        bool RemoveAward(int awardId);
     }
 }
