@@ -59,8 +59,6 @@ namespace EpamTasks.Entities
             return allContainsKey;
         }
 
-
-
         public KeyValuePair<string, int>[] GetUserAwards(int userId)
         {
             UserInfo user = _users[userId];

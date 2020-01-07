@@ -33,7 +33,7 @@ namespace Task06
                 case '1': AddUser(); break;
                 case '2': RemoveUser(); break;
                 case '3': ShowAllUsers(); break;
-                case '4': ; break;
+                case '4': GiveAward(); break;
                 case '5': AwardsEditor(); break;
                 case '6': return false;
                 default: break;
@@ -84,15 +84,31 @@ namespace Task06
             for(int i = 0; i < users.Length; i++)
             {
                 builder.AppendLine($"{users[i].Id} {users[i].Name}, дата рождения:  {users[i].DateOfBirth}, возраст: {users[i].Age}");
+
+                for(int j = 0; j < users[i].Awards.Length; j++)
+                {
+                    builder.AppendLine($"\t{users[i].Awards[j].Key}, в кол-ве {users[i].Awards[j].Value} шт.");
+                }
             }
 
             Console.WriteLine(builder.ToString());
             Console.ReadKey();
         }
 
-        public static bool GiveAnAward()
+        public static void GiveAward()
         {
-            return false;
+
+            if(LogicProvider.UserLogic.GiveAwardToUser(EnterTheIdForce("Введите ID пользователя."), EnterTheIdForce("Введите ID награды.")))
+            {
+                LogicProvider.UserLogic.SaveInFile();
+                Console.WriteLine("Награда вручена.");
+            }
+            else
+            {
+                Console.WriteLine("Данная награда не может быть вручена.");
+            }
+
+            Console.ReadKey();
         }
 
         public static bool AwardsMenu()
@@ -140,10 +156,7 @@ namespace Task06
         public static void RemoveAward()
         {
             ShowAwards();
-            Console.WriteLine("Введите ID удаляемой награды:");
-            
-
-            if (LogicProvider.UserLogic.RemoveAward(EnterTheIdForce()))
+            if (LogicProvider.UserLogic.RemoveAward(EnterTheIdForce("Введите ID удаляемой награды:")))
             {
                 LogicProvider.UserLogic.SaveInFile();
                 Console.WriteLine("Награда удалена.");
@@ -184,8 +197,13 @@ namespace Task06
             return dateTime;
         }
 
-        public static int EnterTheIdForce()
+        public static int EnterTheIdForce(string message = "")
         {
+            if(message != "")
+            {
+                Console.WriteLine(message);
+            }
+
             int id;
             while (!int.TryParse(Console.ReadLine(), out id))
             {

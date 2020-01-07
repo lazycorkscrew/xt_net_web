@@ -79,5 +79,10 @@ namespace EpamTasks.BLL
         {
             return users.RemoveAward(awardId);
         }
+
+        public bool GiveAwardToUser(int userId, int awardId)
+        {
+            return users.GiveAwardToUser(userId, awardId);
+        }
     }
 }

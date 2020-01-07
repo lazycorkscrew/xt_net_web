@@ -18,5 +18,6 @@ namespace EpamTasks.IBLC
         Dictionary<int, string> GetAwardsByUserId();
         bool AddNewAward(string awardName);
         bool RemoveAward(int awardId);
+        bool GiveAwardToUser(int userId, int awardId);
     }
 }
