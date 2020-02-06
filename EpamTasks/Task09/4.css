@@ -1,0 +1,36 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+
+img {
+	float: left;
+	margin: 6px;
+}
+
+#preview{
+	font-family: sans-serif,serif;
+	width: 100%;
+	margin: 0px;
+	border-bottom: solid 3px black;
+	background-color: #0690CF;
+	color:#FFF;
+	/*padding:15px 0px;*/
+	text-align: right;
+	position: relative;
+}
+
+#preview>button{
+	background-color: #0690CF;
+	color: #fff;
+	border: 2px solid #fff;
+	font-size: 16px;
+	height: 35px;
+	width: 200px;
+	padding: 0px 12px;
+	margin: 15px 15px ;
+}
+
+#preview>span{
+	width:30px;
+}
