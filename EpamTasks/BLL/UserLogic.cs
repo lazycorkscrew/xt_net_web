@@ -84,5 +84,30 @@ namespace EpamTasks.BLL
         {
             return users.GiveAwardToUser(userId, awardId);
         }
+
+        public DateTime EnterTheBirthDateTime(string dateTimeString)
+        {
+            DateTime dateTime;
+            DateTime.TryParse(dateTimeString, out dateTime);
+            return dateTime;
+        }
+
+        public string ShowAllUsers()
+        {
+            User[] users = GetArray();
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<ul>");
+            for (int i = 0; i < users.Length; i++)
+            {
+                builder.AppendLine($"<li>{users[i].Id} {users[i].Name}, дата рождения:  {users[i].DateOfBirth}, возраст: {users[i].Age}</li>");
+
+                for (int j = 0; j < users[i].Awards.Length; j++)
+                {
+                    builder.AppendLine($"<li>\t{users[i].Awards[j].Key}, в кол-ве {users[i].Awards[j].Value} шт.</li>");
+                }
+            }
+            builder.AppendLine("</ul>");
+            return builder.ToString();
+        }
     }
 }

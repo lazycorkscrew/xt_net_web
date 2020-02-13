@@ -1,0 +1,44 @@
+body#task10 {
+	margin: 0px;
+	background-color: #c6e2ff;
+}
+
+.zagolovok {
+	background-color: #0690CF;
+	padding: 20px;
+	font-size: 60px;
+	color: white;
+	text-align: center;
+	font-family: Helvetica;
+}
+.maincontent {
+	background-color: #d4f0ff;
+	width: 60%;
+	/*padding: 40px;*/
+	display: inline-block;
+	height: 100%;
+	position: absolute;
+}
+.menur{
+	float: right;
+	/*position: relative;*/
+	width: 40%;
+	height: 100%;
+	background-color: #c6e2ff;
+	/*padding: 40px;*/
+	/*top: -18px;*/
+}
+.centr{
+	margin: 0 auto;
+	width: 60%;
+}
+ li {
+    list-style-type: none; /* Убираем маркеры */
+   }
+   ul {
+    margin-left: 0; /* Отступ слева в браузере IE и Opera */
+    padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
+   }
+   h3{
+	   text-align: center;
+   }

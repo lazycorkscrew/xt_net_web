@@ -1,0 +1,41 @@
+﻿@using EpamTasks.Entities;
+@using EpamTasks.PL;
+
+@{
+    Layout = "~/Layouts/_MainLayout.cshtml";
+}
+
+
+<div>
+    @{
+        //bool b = LogicProvider.UserLogic.SaveInFile();
+        bool a = LogicProvider.UserLogic.LoadFromFile();
+        User[] users = LogicProvider.UserLogic.GetArray();
+        LogicProvider.UserLogic.AddUser("Максим", LogicProvider.UserLogic.EnterTheBirthDateTime("22.06.1995"));
+
+        <div>
+            @foreach (User user in users)
+            {
+                <div>@user.Id @user.Name, дата рождения:  (@user.DateOfBirth), возраст: @user.Age</div>
+                <ul>
+                    @foreach (KeyValuePair<string, int> award in user.Awards)
+                    {
+                        <li>@award.Key, в кол-ве @award.Value шт.</li>
+                    }
+                </ul>
+            }
+        </div>
+    }
+</div>
+@section Menu
+{
+    @if (true) //Заглушка для авторизации
+    {
+        @RenderPage("~/Pages/MenuPage.cshtml")
+    }
+    else
+    {
+        @RenderPage("~/Pages/AuthPage.cshtml")
+    }
+
+}

@@ -19,5 +19,7 @@ namespace EpamTasks.IBLC
         bool AddNewAward(string awardName);
         bool RemoveAward(int awardId);
         bool GiveAwardToUser(int userId, int awardId);
+        DateTime EnterTheBirthDateTime(string dateTimeString);
+        string ShowAllUsers();
     }
 }

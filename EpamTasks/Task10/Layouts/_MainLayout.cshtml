@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> Юзеры и награды</title>
+    <link rel="stylesheet" type="text/css" href="Content/style.css">
+</head>
+<body id="task10">
+    <div class="zagolovok">Юзеры и награды</div>
+    <div class="maincontent">
+        <p>@RenderBody()</p>
+    </div>
+    <div class="menur">
+
+        <div>
+            @RenderSection("Menu", false)
+        </div>
+    </div>
+</body>
+</html>
