@@ -37,6 +37,11 @@ namespace EpamTasks.BLL
             }
         }
 
+        public User GetUserById(int id)
+        {
+            return users[id];
+        }
+
         public User[] GetArray()
         {
             return users.ToArray();
@@ -63,6 +68,11 @@ namespace EpamTasks.BLL
         public Dictionary<int, string> GetAwards()
         {
             return users.Awards;
+        }
+
+        public KeyValuePair<int, string> GetAwardById(int id)
+        {
+            return new KeyValuePair<int, string> (id,  users.Awards[id]);
         }
 
         public Dictionary<int, string> GetAwardsByUserId()

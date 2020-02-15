@@ -1,0 +1,26 @@
+﻿@using EpamTasks.Entities;
+@using EpamTasks.PL;
+
+@{
+    Layout = null;
+}
+
+@{
+    int id;
+
+    if (int.TryParse(Request["id"], out id))
+    {
+        try
+        {
+            @LogicProvider.UserLogic.GetAwardById(id).Value
+        }
+        catch (KeyNotFoundException)
+        {
+            @("Пользователь не найден.")
+        }
+    }
+    else
+    {
+        @("Пожалуйста, не надо играться с аргументами...")
+    }
+}

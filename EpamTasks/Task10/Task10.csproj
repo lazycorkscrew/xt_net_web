@@ -100,11 +100,14 @@
     <Content Include="index.cshtml" />
     <Content Include="Layouts\_MainLayout.cshtml" />
     <None Include="packages.config" />
-    <Content Include="Pages\ShowUsersPage.cshtml" />
     <Content Include="Pages\MenuPage.cshtml" />
-    <Content Include="Pages\AddUserPage.cshtml" />
-    <Content Include="Pages\RemoveUserPage.cshtml" />
     <Content Include="Pages\AuthPage.cshtml" />
+    <Content Include="Pages\Welcome.cshtml" />
+    <Content Include="Pages\Users.cshtml" />
+    <Content Include="Pages\Awards.cshtml" />
+    <Content Include="Pages\Registration.cshtml" />
+    <Content Include="Pages\User.cshtml" />
+    <Content Include="Pages\Award.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

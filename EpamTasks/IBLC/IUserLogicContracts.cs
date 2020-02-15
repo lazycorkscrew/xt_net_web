@@ -21,5 +21,7 @@ namespace EpamTasks.IBLC
         bool GiveAwardToUser(int userId, int awardId);
         DateTime EnterTheBirthDateTime(string dateTimeString);
         string ShowAllUsers();
+        User GetUserById(int id);
+        KeyValuePair<int, string> GetAwardById(int id);
     }
 }
