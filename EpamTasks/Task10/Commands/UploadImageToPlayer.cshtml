@@ -1,0 +1,30 @@
+﻿@using EpamTasks.Entities;
+@using EpamTasks.PL;
+
+@{
+    Layout = null;
+
+    int id = int.Parse(Request["id"]);
+
+    WebImage photo = null;
+    var newFileName = "";
+
+    if (IsPost)
+    {
+        photo = WebImage.GetImageFromRequest();
+        if (photo != null)
+        {
+            User user = LogicProvider.UserLogic.GetUserById(id);
+            newFileName = $"user_{id}.jpg";
+            string path = Path.Combine($"~\\images\\users", newFileName);
+            LogicProvider.UserLogic.SetImageLocationByUserId(id, newFileName);
+            bool b = LogicProvider.UserLogic.SaveInFile();
+            photo.Save(path);
+            Response.Redirect($"~/?page=user&id={id}");
+        }
+    }
+
+    <div>Что-то пошло не так.</div>
+}
+
+

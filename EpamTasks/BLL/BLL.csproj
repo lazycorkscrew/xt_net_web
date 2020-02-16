@@ -41,6 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccessProvider.cs" />
+    <Compile Include="Settings1.Designer.cs">
+      <DependentUpon>Settings1.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <Compile Include="UserLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,6 +66,13 @@
       <Project>{0FA09910-D321-4FFE-A50D-A1197D3ACC4C}</Project>
       <Name>IDAC</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Settings1.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

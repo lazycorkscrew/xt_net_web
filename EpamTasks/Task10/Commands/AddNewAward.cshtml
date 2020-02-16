@@ -1,0 +1,16 @@
+﻿@using EpamTasks.Entities;
+@using EpamTasks.PL;
+@{
+    Layout = null;
+
+    string awardName = Request["newawardname"];
+
+    if(!string.IsNullOrEmpty(awardName))
+    {
+        if(LogicProvider.UserLogic.AddNewAward(awardName, string.Empty) && LogicProvider.UserLogic.SaveInFile())
+        {
+            Response.Redirect("~/?page=awards");
+        }
+    }
+    <div>Что-то пошло не так.</div>
+}

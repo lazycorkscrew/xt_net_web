@@ -13,12 +13,6 @@
             @foreach (User user in users)
             {
                 <div><a href="~/?page=user&id=@user.Id">@user.Id @user.Name, дата рождения:  (@user.DateOfBirth), возраст: @user.Age</a></div>
-                <ul>
-                    @foreach (KeyValuePair<string, int> award in user.Awards)
-                    {
-                        <li>@award.Key, в кол-ве @award.Value шт.</li>
-                    }
-                </ul>
             }
         </div>
     }

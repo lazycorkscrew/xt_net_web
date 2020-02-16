@@ -3,21 +3,33 @@
 
 @{
     Layout = null;
-}
 
-@{
     int id;
+
+    string act = Request["act"];
+
+
 
     if (int.TryParse(Request["id"], out id))
     {
-        try
+        if (act != "remove")
         {
-            @LogicProvider.UserLogic.GetAwardById(id).Value
+            try
+            {
+                @LogicProvider.UserLogic.GetAwardById(id).Value.Name
+                <div><a href="~/?page=award&id=@id&act=remove">Удалить награду</a></div>
+
+            }
+            catch (KeyNotFoundException)
+            {
+                @("Награда не найдена.")
+            }
         }
-        catch (KeyNotFoundException)
+        else
         {
-            @("Пользователь не найден.")
+            @(LogicProvider.UserLogic.RemoveAward(id) && LogicProvider.UserLogic.SaveInFile());
         }
+
     }
     else
     {

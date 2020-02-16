@@ -1,0 +1,20 @@
+﻿@using EpamTasks.Entities;
+@using EpamTasks.PL;
+@{
+    Layout = null;
+
+    int userId;
+    int awardId;
+
+    if (int.TryParse(Request["userid"], out userId) && int.TryParse(Request["awardid"], out awardId))
+    {
+        if (LogicProvider.UserLogic.DepriveAward(userId, awardId) && LogicProvider.UserLogic.SaveInFile())
+        {
+            Response.Redirect($"~/?page=user&id={userId}");
+        }
+    }
+
+    <div>Что-то пошло не так.</div>
+}
+
+

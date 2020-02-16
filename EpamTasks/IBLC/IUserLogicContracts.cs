@@ -14,14 +14,19 @@ namespace EpamTasks.IBLC
         User[] GetArray();
         bool LoadFromFile();
         bool SaveInFile();
-        Dictionary<int, string> GetAwards();
-        Dictionary<int, string> GetAwardsByUserId();
-        bool AddNewAward(string awardName);
+        Dictionary<int, Award> GetAwards();
+        Dictionary<int, Award> GetAwardsByUserId(int id);
+        bool AddNewAward(string awardName, string imagePath);
         bool RemoveAward(int awardId);
         bool GiveAwardToUser(int userId, int awardId);
         DateTime EnterTheBirthDateTime(string dateTimeString);
         string ShowAllUsers();
         User GetUserById(int id);
-        KeyValuePair<int, string> GetAwardById(int id);
+        KeyValuePair<int, Award> GetAwardById(int id);
+        bool DepriveAward(int userId, int awardId);
+        string GetImageLocationByUserId(int id);
+        void SetImageLocationByUserId(int id, string imagePath);
+        string GetImageLocationByAwardId(int id);
+        void SetImageLocationByAwardId(int id, string imagePath);
     }
 }

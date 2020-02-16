@@ -11,33 +11,35 @@ namespace EpamTasks.Entities
         public Dictionary<int, UserInfo> _users { get; }
         public int _nextUserId = 0;
         public int _nextAwardId = 0;
-        public Dictionary<int, string> Awards { get; } 
+        public Dictionary<int, Award> Awards { get; } 
 
         public User this[int Key]
         {
             get
             {
-                return new User { Id = Key, Name = _users[Key].Name, DateOfBirth = _users[Key].DateOfBirth, Age = _users[Key].Age, Awards = GetUserAwards(Key) };
+                return new User { Id = Key, Name = _users[Key].Name, DateOfBirth = _users[Key].DateOfBirth, Age = _users[Key].Age, Awards = GetUserAwards(Key), ProfileImagePath = _users[Key].ProfileImagePath };
             }
         }
 
         public Users()
         {
             _users = new Dictionary<int, UserInfo>();
-            Awards = new Dictionary<int, string>();
+            Awards = new Dictionary<int, Award>();
         }
 
-        public void Add(string name, DateTime birthDay)
+        public void Add(string name, DateTime birthDay, bool rights, string imagePath)
         {
-            _users.Add(_nextUserId++ , new UserInfo(name, birthDay));
+            _users.Add(_nextUserId++ , new UserInfo(name, birthDay, rights, imagePath));
         }
 
-        public bool AddNewAward(string awardName)
+        public bool AddNewAward(string awardName, string imagePath)
         {
-            bool containsValue = (Awards.ContainsValue(awardName));
+
+            Award award = new Award {id = _nextAwardId++, Name = awardName, ImagePath = imagePath };
+            bool containsValue = (Awards.ContainsValue(award));
             if (!containsValue)
             {
-                Awards.Add(_nextAwardId++, awardName);
+                Awards.Add(_nextAwardId, award);
             }
 
             return !containsValue;
@@ -59,19 +61,46 @@ namespace EpamTasks.Entities
             return allContainsKey;
         }
 
-        public KeyValuePair<string, int>[] GetUserAwards(int userId)
+        public bool DepriveAwardFromUser(int userId, int awardId)
+        {
+            bool allContainsKey = (_users.ContainsKey(userId));
+            if (allContainsKey)
+            {
+                _users[userId].DepriveAward(awardId);
+            }
+
+            return allContainsKey;
+        }
+
+        public KeyValuePair<Award, int>[] GetUserAwards(int userId)
         {
             UserInfo user = _users[userId];
             int[] keys = user?.Awards?.Keys.ToArray();
-            KeyValuePair<string, int>[] userAwards = new KeyValuePair<string, int>[keys.Length];
+            KeyValuePair<Award, int>[] userAwards = new KeyValuePair<Award, int>[keys.Length];
             
             for(int i = 0; i < keys.Length; i++)
             {
-                string awardName = (Awards.ContainsKey(keys[i]) ? Awards[keys[i]] : "(Неизвестная награда)");
-                userAwards[i] = new KeyValuePair<string, int>(awardName, user.Awards[keys[i]]);
+                //Award awardName = new Award {Name = (Awards.ContainsKey(keys[i]) ? Awards[keys[i]] : "(Неизвестная награда)"), ImagePath = string.Empty};
+                Award awardName;
+
+                try
+                {
+                    awardName = new Award {id=keys[i], Name = Awards[keys[i]].Name, ImagePath = Awards[keys[i]].ImagePath };
+                }
+                catch(KeyNotFoundException)
+                {
+                    awardName = new Award {id=keys[i], Name = $"(Неизвестная награда с ID = {keys[i]})", ImagePath = string.Empty };
+                }
+
+                userAwards[i] = new KeyValuePair<Award, int>(awardName, user.Awards[keys[i]]);
             }
 
             return userAwards;
+        }
+
+        public void SetImageName(int id, string fileName)
+        {
+            _users[id].ProfileImagePath = fileName;
         }
 
         public bool RemoveUserAt(int id)

@@ -6,18 +6,19 @@
     string newAwardName = Request["newAwardName"];
     if(!string.IsNullOrEmpty(newAwardName))
     {
-        LogicProvider.UserLogic.AddNewAward(newAwardName);
+        LogicProvider.UserLogic.AddNewAward(newAwardName, string.Empty);
+        LogicProvider.UserLogic.SaveInFile();
     }
 
-    Dictionary<int, string> awards = LogicProvider.UserLogic.GetAwards();
+    Dictionary<int, Award> awards = LogicProvider.UserLogic.GetAwards();
 
-    foreach(var award in awards)
+    foreach(KeyValuePair<int, Award> award in awards)
     {
-        <div><a href="~/?page=award&id=@award.Key">@($"{award.Key}, {award.Value}")</a></div>
+        <div><a href="~/?page=award&id=@award.Key">@($"{award.Key}, {award.Value.Name}")</a></div>
     }
 }
 
-<form action="/?page=awards" method="post">
-    <input type="text" name="newAwardName" />
+<form action="~/Commands/AddNewAward.cshtml" method="post">
+    <input type="text" name="newawardname" />
     <button>Создать</button>
 </form>

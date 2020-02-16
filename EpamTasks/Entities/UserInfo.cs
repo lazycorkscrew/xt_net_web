@@ -11,6 +11,8 @@ namespace EpamTasks.Entities
         public string Name { get; }
         public DateTime DateOfBirth { get; }
         public Dictionary<int, int> Awards { get; } = new Dictionary<int, int>();
+        public bool AdminRights = false;
+        public string ProfileImagePath = string.Empty;
 
         public void GiveAward(int awardId)
         {
@@ -24,6 +26,26 @@ namespace EpamTasks.Entities
             }
         }
 
+        public bool DepriveAward(int awardId)
+        {
+            if (Awards.ContainsKey(awardId))
+            {
+                if(Awards[awardId]>1)
+                {
+                    Awards[awardId]--;
+                    return true;
+                }
+                else
+                {
+                    return Awards.Remove(awardId);
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public int Age
         {
             get
@@ -32,10 +54,12 @@ namespace EpamTasks.Entities
             }
         }
 
-        public UserInfo(string name, DateTime dateOfBirth)
+        public UserInfo(string name, DateTime dateOfBirth, bool adminRights, string profileImagePath)
         {
             Name = name;
             DateOfBirth = dateOfBirth;
+            AdminRights = adminRights;
+            ProfileImagePath = profileImagePath;
         }
     }
 }

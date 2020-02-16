@@ -87,7 +87,7 @@ namespace Task06
 
                 for(int j = 0; j < users[i].Awards.Length; j++)
                 {
-                    builder.AppendLine($"\t{users[i].Awards[j].Key}, в кол-ве {users[i].Awards[j].Value} шт.");
+                    builder.AppendLine($"\t{users[i].Awards[j].Key.Name}, в кол-ве {users[i].Awards[j].Value} шт.");
                 }
             }
 
@@ -140,7 +140,7 @@ namespace Task06
 
         public static void AddNewAward()
         {
-            if(LogicProvider.UserLogic.AddNewAward(EnterTheNameForce("Введите название новой награды:")))
+            if(LogicProvider.UserLogic.AddNewAward(EnterTheNameForce("Введите название новой награды:"), string.Empty))
             {
                 LogicProvider.UserLogic.SaveInFile();
                 Console.WriteLine("Новая награда добавлена.");
@@ -172,8 +172,8 @@ namespace Task06
         public static void ShowAwards()
         {
             //Console.Clear();
-            Dictionary<int, string> awards = LogicProvider.UserLogic.GetAwards();
-            foreach (KeyValuePair<int, string> award in awards)
+            Dictionary<int, Award> awards = LogicProvider.UserLogic.GetAwards();
+            foreach (KeyValuePair<int, Award> award in awards)
             {
                 Console.WriteLine($"{award.Key} {award.Value}");
             }
