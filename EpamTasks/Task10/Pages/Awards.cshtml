@@ -6,15 +6,15 @@
     string newAwardName = Request["newAwardName"];
     if(!string.IsNullOrEmpty(newAwardName))
     {
-        LogicProvider.UserLogic.AddNewAward(newAwardName, string.Empty);
+        LogicProvider.UserLogic.AddNewAward(newAwardName, new byte[] { });
         LogicProvider.UserLogic.SaveInFile();
     }
 
-    Dictionary<int, Award> awards = LogicProvider.UserLogic.GetAwards();
+    List<Award> awards = LogicProvider.UserLogic.GetAwards() as List<Award>;
 
-    foreach(KeyValuePair<int, Award> award in awards)
+    foreach(Award award in awards)
     {
-        <div><a href="~/?page=award&id=@award.Key">@($"{award.Key}, {award.Value.Name}")</a></div>
+        <div><a href="~/?page=award&id=@award.Id">@($"{award.Id}, {award.Title}")</a></div>
     }
 }
 

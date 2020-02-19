@@ -122,6 +122,7 @@
     <Content Include="Commands\DepriveAward.cshtml" />
     <Content Include="Commands\UploadImageToPlayer.cshtml" />
     <Content Include="Commands\UploadImageToAward.cshtml" />
+    <Content Include="Commands\Image.cshtml" />
     <None Include="packages.config" />
     <Content Include="Pages\MenuPage.cshtml" />
     <Content Include="Pages\AuthPage.cshtml" />

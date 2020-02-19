@@ -1,12 +1,18 @@
-﻿@{
+﻿@using EpamTasks.Entities;
+@using EpamTasks.PL;
+@{
     Layout = null;
+
+    @LogicProvider.UserLogic.AddUser("Гоблин", DateTime.Now, "qwerty", "qwerty");
+
+    //Request["login"];
 }
 
-    <div>
-        <form action="/" method="post">
-            Логин: <div><input type="text" name="login" /></div>
-            Пароль: <div><input type="password" name="pass" /></div>
-            Дата рождения: <div><input type="password" name="datebirth" /></div>
-            <button>Регистрация</button>
-        </form>
-    </div>
+<div>
+    <form action="/" method="post">
+        Логин: <div><input type="text" name="login" /></div>
+        Пароль: <div><input type="password" name="pass" /></div>
+        Дата рождения: <div><input type="password" name="datebirth" /></div>
+        <button>Регистрация</button>
+    </form>
+</div>

@@ -87,7 +87,7 @@ namespace Task06
 
                 for(int j = 0; j < users[i].Awards.Length; j++)
                 {
-                    builder.AppendLine($"\t{users[i].Awards[j].Key.Name}, в кол-ве {users[i].Awards[j].Value} шт.");
+                    builder.AppendLine($"\t{users[i].Awards[j].Key.Title}, в кол-ве {users[i].Awards[j].Value} шт.");
                 }
             }
 

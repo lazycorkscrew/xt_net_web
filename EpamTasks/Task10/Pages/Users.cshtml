@@ -2,18 +2,34 @@
 @using EpamTasks.PL;
 @{
     Layout = null;
+
+    string pageNumStr = Request["pagenum"];
+    int currentPageNum; 
+
+
+    if(!int.TryParse(pageNumStr, out currentPageNum))
+    {
+        currentPageNum = 1;
+    }
+
 }
 
-<div>
-    @{
-        //bool b = LogicProvider.UserLogic.SaveInFile();
-        User[] users = LogicProvider.UserLogic.GetArray();
+    <div>
+        @{
+            //bool b = LogicProvider.UserLogic.SaveInFile();
+            List<User> users = LogicProvider.UserLogic.SelectShortUsersInfo(10, 10*(currentPageNum-1)) as List<User>;
 
-        <div>
-            @foreach (User user in users)
+            <div>
+                @foreach (User user in users)
+                {
+                    <div><a href="~/?page=user&id=@user.Id"><img src="~/Commands/Image?user_id=@user.Id"/>@user.Id @user.Name</a></div>
+                }
+            </div>
+            if (currentPageNum > 1)
             {
-                <div><a href="~/?page=user&id=@user.Id">@user.Id @user.Name, дата рождения:  (@user.DateOfBirth), возраст: @user.Age</a></div>
+                <a href="~/?page=users&pagenum=@(currentPageNum-1)">&#60;</a>
             }
-        </div>
-    }
-</div>
+
+            <a href="~/?page=users&pagenum=@(currentPageNum+1)">&#62;</a>
+        }
+    </div>

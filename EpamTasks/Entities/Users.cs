@@ -17,7 +17,7 @@ namespace EpamTasks.Entities
         {
             get
             {
-                return new User { Id = Key, Name = _users[Key].Name, DateOfBirth = _users[Key].DateOfBirth, Age = _users[Key].Age, Awards = GetUserAwards(Key), ProfileImagePath = _users[Key].ProfileImagePath };
+                return new User { Id = Key, Name = _users[Key].Name, DateOfBirth = _users[Key].DateOfBirth, Age = _users[Key].Age, Awards = GetUserAwards(Key) };
             }
         }
 
@@ -35,7 +35,7 @@ namespace EpamTasks.Entities
         public bool AddNewAward(string awardName, string imagePath)
         {
 
-            Award award = new Award {id = _nextAwardId++, Name = awardName, ImagePath = imagePath };
+            Award award = new Award {Id = _nextAwardId++, Title = awardName };
             bool containsValue = (Awards.ContainsValue(award));
             if (!containsValue)
             {
@@ -85,11 +85,11 @@ namespace EpamTasks.Entities
 
                 try
                 {
-                    awardName = new Award {id=keys[i], Name = Awards[keys[i]].Name, ImagePath = Awards[keys[i]].ImagePath };
+                    awardName = new Award {Id=keys[i], Title = Awards[keys[i]].Title };
                 }
                 catch(KeyNotFoundException)
                 {
-                    awardName = new Award {id=keys[i], Name = $"(Неизвестная награда с ID = {keys[i]})", ImagePath = string.Empty };
+                    awardName = new Award {Id=keys[i], Title = $"(Неизвестная награда с ID = {keys[i]})" };
                 }
 
                 userAwards[i] = new KeyValuePair<Award, int>(awardName, user.Awards[keys[i]]);

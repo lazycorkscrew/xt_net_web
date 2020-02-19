@@ -14,7 +14,8 @@ namespace EpamTasks.PL
 
         static LogicProvider()
         {
-            UserLogic = new UserLogic();
+            //UserLogic = new UserLogic();
+            UserLogic = new UserLogicFromDB();
         }
     }
 }

@@ -49,6 +49,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{97BA9974-26E7-4256-808A-A35D3FC1C06A}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IDAC\IDAC.csproj">
       <Project>{0FA09910-D321-4FFE-A50D-A1197D3ACC4C}</Project>
       <Name>IDAC</Name>

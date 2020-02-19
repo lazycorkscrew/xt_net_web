@@ -1,0 +1,42 @@
+﻿@using EpamTasks.Entities;
+@using EpamTasks.PL;
+@{
+    Layout = null;
+
+    Response.ContentType = "image/jpeg";
+
+    if (IsPost)
+    {
+        string userIdstr = Request["user_id"];
+        string awardIdstr = Request["award_id"];
+        bool needUser = string.IsNullOrEmpty(userIdstr);
+        bool needAward = string.IsNullOrEmpty(userIdstr);
+
+        byte[] picture = new byte[] { };
+
+        if (needUser ^ needAward)
+        {
+            int id;
+
+
+            if(needUser && int.TryParse(userIdstr, out id))
+            {
+                picture = LogicProvider.UserLogic.SelectUserImage(id);
+            }
+            else if(needAward && int.TryParse(awardIdstr, out id))
+            {
+                picture = LogicProvider.UserLogic.SelectAwardImage(id);
+
+            }
+        }
+
+
+        Response.BinaryWrite(picture);
+    }
+
+
+
+
+}
+
+

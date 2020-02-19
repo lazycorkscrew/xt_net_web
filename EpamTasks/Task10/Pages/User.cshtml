@@ -3,36 +3,35 @@
 
 @{
     Layout = null;
-}
-
-@{
     int id;
+
+
 
 
     if (int.TryParse(Request["id"], out id))
     {
         try
         {
-            User user = LogicProvider.UserLogic.GetUserById(id);
-            Dictionary<int, Award> awards = LogicProvider.UserLogic.GetAwards();
 
-            <div>@user.Name</div>
-            //<object data="images/users/default.jpg" type="image/jpg">
-                <img src="@($"images/users/{LogicProvider.UserLogic.GetImageLocationByUserId(id)}")" />
-            //</object>
+            User user = LogicProvider.UserLogic.GetUserById(id, false);
+            List<Award> userAwards = LogicProvider.UserLogic.GetAwardsByUserId(id) as List<Award>;
+            List<Award> allAwards = LogicProvider.UserLogic.GetAwards() as List<Award>;
+
+                <div>@user.Name</div>
+                <img src="~/Commands/Image?user_id=@user.Id" )" />
                 <ul>
-                    @foreach (KeyValuePair<Award, int> award in user.Awards)
+                    @foreach (Award award in userAwards)
                     {
-                        <li>@award.Key.Name, в кол-ве @award.Value шт. <a href="~/Commands/DepriveAward.cshtml?userid=@user.Id&awardid=@award.Key.id">Отнять</a></li>
+                        <li>@award.Title<a href="~/Commands/DepriveAward.cshtml?userid=@user.Id&awardid=@award.Id">Отнять</a></li>
                     }
                 </ul>
 
                 <form action="~/Commands/GiveAnAward.cshtml" method="post">
                     <input type="hidden" name="userId" value="@id" />
                     <select name="awardId">
-                        @foreach (var award in awards)
+                        @foreach (var award in allAwards)
                         {
-                            <option value="@award.Key">@award.Value.Name</option>
+                            <option value="@award.Id">@award.Title</option>
                         }
                     </select>
                     <button>Вручить</button>
@@ -44,14 +43,16 @@
                     <button>Отправить</button>
                 </form>
 
-                }
-                catch (KeyNotFoundException)
-                {
-                @("Пользователь не найден.")
-                }
-                }
-                else
-                {
-                @("Пожалуйста, не надо играться с аргументами...")
-                }
-                }
+        }
+        catch (KeyNotFoundException)
+        {
+            @("Пользователь не найден.")
+        }
+
+    }
+    else
+    {
+        @("Пожалуйста, не надо играться с аргументами...")
+    }
+}
+    

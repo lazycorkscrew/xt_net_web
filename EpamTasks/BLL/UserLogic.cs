@@ -13,7 +13,7 @@ namespace EpamTasks.BLL
     {
         Users users = new Users();
 
-        public bool AddUser(string name, DateTime birthDay)
+        public bool AddUser(string name, DateTime birthDay, string login, string password)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace EpamTasks.BLL
             }
         }
 
-        public User GetUserById(int id)
+        public User GetUserById(int id, bool needShortInfo)
         {
             return users[id];
         }
@@ -78,9 +78,10 @@ namespace EpamTasks.BLL
             return DataAccessProvider.FileAccessor.SaveSerializedObject(users, Settings1.Default.DataPath);
         }
 
-        public Dictionary<int, Award> GetAwards()
+        public IEnumerable<Award> GetAwards()
         {
-            return users.Awards;
+            throw new  NotImplementedException();
+            //return users.Awards;
         }
 
         public KeyValuePair<int, Award> GetAwardById(int id)
@@ -88,14 +89,15 @@ namespace EpamTasks.BLL
             return new KeyValuePair<int, Award> (id,  users.Awards[id]);
         }
 
-        public Dictionary<int, Award> GetAwardsByUserId(int id)
+        public IEnumerable<Award> GetAwardsByUserId(int id)
         {
             throw new NotImplementedException();
         }
 
         public string GetImageLocationByUserId(int id)
         {
-            return users[id].ProfileImagePath ?? string.Empty;
+            throw new NotImplementedException();
+            //return users[id].ProfileImage ?? string.Empty;
         }
 
         public void SetImageLocationByUserId(int id, string imageName)
@@ -105,18 +107,20 @@ namespace EpamTasks.BLL
 
         public string GetImageLocationByAwardId(int id)
         {
-            return Path.Combine(Settings1.Default.AwardsImagesPath, GetAwards()[id].ImagePath);
+            throw new NotImplementedException();
+            //return Path.Combine(Settings1.Default.AwardsImagesPath, GetAwards()[id].ImagePath);
         }
 
         public void SetImageLocationByAwardId(int id, string imagePath)
         {
-            users.Awards[id].ImagePath = imagePath;
+            throw new NotImplementedException();
+            //users.Awards[id].ImagePath = imagePath;
         }
 
 
-        public bool AddNewAward(string awardName, string imagePath)
+        public bool AddNewAward(string awardName, byte[] image)
         {
-            return users.AddNewAward(awardName, imagePath);
+            return users.AddNewAward(awardName, null);
         }
 
         public bool RemoveAward(int awardId)
@@ -155,6 +159,21 @@ namespace EpamTasks.BLL
         public bool DepriveAward(int userId, int awardId)
         {
             return users.DepriveAwardFromUser(userId, awardId);
+        }
+
+        public IEnumerable<User> SelectShortUsersInfo(int count, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] SelectUserImage(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] SelectAwardImage(int awardId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EpamTasks.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +13,17 @@ namespace EpamTasks.IDAC
         bool DeleteUser(int id);
         bool GiveAwardToUser(int userId, int awardId);
         bool DepriveUserOfAward(int userId, int awardId);
-        bool RegisterAward(string newAwardName);
+        bool RegisterAward(string newAwardName, byte[] image);
         bool DeleteAward(int awardName);
         bool UpdateRights(int userId, int RightId);
+        IEnumerable<Award> SelectUserAwards(int userId);
+        IEnumerable<Award> SelectAwards();
+        User SelectShortUserInfo(int userId);
+        IEnumerable<User> SelectShortUsersInfo(int count, int offset);
+        User SelectFullUserInfo(int userId);
+        int CheckRightsVolume(int userId);
 
-        void SelectUserAwards(int userId);
-        void SelectShortUserInfo(int userId);
-        void SelectFullUserInfo(int userId);
-        void CheckRightsVolume(int userId);
+        byte[] SelectUserImage(int userId);
+        byte[] SelectAwardImage(int awardId);
     }
 }

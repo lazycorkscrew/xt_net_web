@@ -14,7 +14,9 @@ namespace EpamTasks.Entities
         public DateTime DateOfBirth { get; set; }
         public int Age { get; set; }
         public KeyValuePair<Award, int>[] Awards { get; set; }
-        public string ProfileImagePath { get; set; }
-        public string Pass { get; set; }
+        public byte[] ProfileImage { get; set; }
+        public string Rank { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
     }
 }

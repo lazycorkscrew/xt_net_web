@@ -11,10 +11,12 @@ namespace EpamTasks.BLL
     internal static class DataAccessProvider
     {
         internal static IFileAccessorContracts FileAccessor { get; }
+        internal static IDBAccessorContracts DBAccessor { get; }
 
         static DataAccessProvider ()
         {
             FileAccessor = new FileAccessor();
+            DBAccessor = new DBAccessor();
         }
     }
 }
