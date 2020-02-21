@@ -13,17 +13,21 @@ namespace EpamTasks.IDAC
         bool DeleteUser(int id);
         bool GiveAwardToUser(int userId, int awardId);
         bool DepriveUserOfAward(int userId, int awardId);
-        bool RegisterAward(string newAwardName, byte[] image);
-        bool DeleteAward(int awardName);
+        bool RegisterAward(string newAwardName);
+        bool DeleteAward(int awardId);
         bool UpdateRights(int userId, int RightId);
         IEnumerable<Award> SelectUserAwards(int userId);
         IEnumerable<Award> SelectAwards();
         User SelectShortUserInfo(int userId);
         IEnumerable<User> SelectShortUsersInfo(int count, int offset);
         User SelectFullUserInfo(int userId);
-        int CheckRightsVolume(int userId);
+        Award SelectAward(int awardId);
 
         byte[] SelectUserImage(int userId);
         byte[] SelectAwardImage(int awardId);
+        bool UploadImageToUser(int user_id, byte[] image);
+        bool UploadImageToAward(int award_id, byte[] image);
+        byte[] SelectDefaultImage();
+        short CheckRightsVolume(string login, string password);
     }
 }

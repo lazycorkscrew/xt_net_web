@@ -2,7 +2,8 @@
 @using EpamTasks.PL;
 @{
     Layout = "~/Layouts/_MainLayout.cshtml";
-
+    string login = Response.Cookies["login"].
+    //string password = Response.Cookies.Get("password").Value;
 
     //bool a = LogicProvider.UserLogic.LoadFromFile();
     string page = Request["page"];
@@ -13,29 +14,30 @@
         case "awards": @RenderPage($"~/Pages/Awards.cshtml"); break;
         case "award": @RenderPage($"~/Pages/Award.cshtml"); break;
         default: @RenderPage($"~/Pages/Welcome.cshtml"); break;
-}
-try
-{
-RenderPage($"~/Pages/{page}.cshtml");
+    }
 
-}
-catch (Exception)
-{
+    /*try
+    {
+        @RenderPage($"~/Pages/{page}.cshtml");
+    }
 
-}
+    catch (Exception)
+    {
+
+    }*/
 
 }
 
 @section Menu
     {
-
-    @if (true) //Заглушка для авторизации
-    {
-        @RenderPage("~/Pages/MenuPage.cshtml")
-    }
-    else
-    {
-        @RenderPage("~/Pages/AuthPage.cshtml")
-    }
-
+    <div>
+        @if (true) //Заглушка для авторизации
+        {
+            @RenderPage("~/Pages/MenuPage.cshtml")
+        }
+        else
+        {
+            @RenderPage("~/Pages/AuthPage.cshtml")
+        }
+    </div>
 }

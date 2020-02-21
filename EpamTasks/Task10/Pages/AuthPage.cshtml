@@ -1,11 +1,45 @@
-﻿@{
+﻿@using EpamTasks.Entities;
+@using EpamTasks.PL;
+@{
     Layout = null;
+
+    if (IsPost)
+    {
+        try
+        {
+            string login = Request["login"];
+            string password = Request["password"];
+            short rights = LogicProvider.UserLogic.CheckRightsVolume(login, password);
+            if (rights >= 0)
+            {
+                Response.Cookies["login"].Value = login;
+                Response.Cookies["login"].Expires = DateTime.Now.AddDays(10);
+                Response.Cookies["password"].Value = password;
+                Response.Cookies["password"].Expires = DateTime.Now.AddDays(10);
+                Response.Redirect("~/");
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+        }
+        catch(Exception ex)
+        {
+            <p>Не найдено соответствие логина/пароля.</p>
+        }
+
+
+    }
+
+
+
+
 }
 
 <div>
-    <form action="/" method="post">
+    <form action="~/Pages/AuthPage.cshtml" method="post">
         Логин: <div><input type="text" name="login" /></div>
-        Пароль: <div><input type="password" name="pass" /></div>
+        Пароль: <div><input type="password" name="password" /></div>
         <button>Войти</button>
     </form>
 </div>

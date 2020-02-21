@@ -2,26 +2,31 @@
 @using EpamTasks.PL;
 
 @{
-    Layout = null;
-    int id;
+                Layout = null;
+                int id;
+                short rights = -1;
 
+                
 
+                if(login != null && password != null)
+                {
+                    rights = LogicProvider.UserLogic.CheckRightsVolume(login, password);
+                }
 
+                if (int.TryParse(Request["id"], out id))
+                {
+                    try
+                    {
 
-    if (int.TryParse(Request["id"], out id))
-    {
-        try
-        {
-
-            User user = LogicProvider.UserLogic.GetUserById(id, false);
-            List<Award> userAwards = LogicProvider.UserLogic.GetAwardsByUserId(id) as List<Award>;
-            List<Award> allAwards = LogicProvider.UserLogic.GetAwards() as List<Award>;
+                        User user = LogicProvider.UserLogic.GetUserById(id, false);
+                        List<Award> userAwards = LogicProvider.UserLogic.GetAwardsByUserId(id) as List<Award>;
+                        List<Award> allAwards = LogicProvider.UserLogic.GetAwards() as List<Award>;
 
                 <div>@user.Name</div>
-                <img src="~/Commands/Image?user_id=@user.Id" )" />
+                <img class="full_img" src="~/Commands/Image?user_id=@user.Id" )" />
                 <ul>
                     @foreach (Award award in userAwards)
-                    {
+            {
                         <li>@award.Title<a href="~/Commands/DepriveAward.cshtml?userid=@user.Id&awardid=@award.Id">Отнять</a></li>
                     }
                 </ul>

@@ -123,6 +123,8 @@
     <Content Include="Commands\UploadImageToPlayer.cshtml" />
     <Content Include="Commands\UploadImageToAward.cshtml" />
     <Content Include="Commands\Image.cshtml" />
+    <Content Include="Commands\RemoveAward.cshtml" />
+    <Content Include="Layouts\_Content.cshtml" />
     <None Include="packages.config" />
     <Content Include="Pages\MenuPage.cshtml" />
     <Content Include="Pages\AuthPage.cshtml" />
@@ -132,6 +134,7 @@
     <Content Include="Pages\Registration.cshtml" />
     <Content Include="Pages\User.cshtml" />
     <Content Include="Pages\Award.cshtml" />
+    <Content Include="Pages\Admin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

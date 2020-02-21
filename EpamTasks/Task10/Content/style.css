@@ -14,9 +14,10 @@ body#task10 {
 .maincontent {
 	background-color: #d4f0ff;
 	width: 60%;
+	min-height:600px;
 	display: inline-block;
-	height: 100%;
 	position: absolute;
+	margin: 0 auto;
 }
 .menur{
 	float: right;
@@ -39,9 +40,20 @@ h3{
 	text-align: center;
 }
 
-img {
-	background-image: url(images/default.jpg);
-	display: block;
-	max-width: 40%;
+.mini_img {
+	text-align:center;
+}
+
+.mini_img img {
+	width: 150px;
+	height: auto;
+	border-radius: 50%;
+	background-color: #f0f2f5;
+	position: relative;
+	position: static;
 	border: 1px solid black;
+}
+
+.full_img {
+	align-self:center;
 }

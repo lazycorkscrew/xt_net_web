@@ -7,6 +7,8 @@ using EpamTasks.IDAC;
 using System.Data.SqlClient;
 using System.Data;
 using EpamTasks.Entities;
+using System.IO;
+using System.Data.Common;
 
 namespace EpamTasks.DAL
 {
@@ -14,16 +16,23 @@ namespace EpamTasks.DAL
     {
         public static string connectionString = "Data Source=ХИМИК-ПК\\SQLEXPRESS; Initial Catalog=UsersAndRewards; Integrated Security=True";// False; User Id=; Password=" 
 
-        public int CheckRightsVolume(int userId)
+
+        public short CheckRightsVolume(string login, string password)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand("CheckRightsVolume", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@user_id", userId);
+                command.Parameters.AddWithValue("@login", login);
+                command.Parameters.AddWithValue("@password", password);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                return reader.Read() ? (int)reader["Power"] : -1;
+                //return reader.Read() ? (short)reader["Power"] : -1;
+                if (reader.Read())
+                {
+                    return (short)reader["Power"];
+                }
+                else return -1;
             }
         }
 
@@ -77,14 +86,13 @@ namespace EpamTasks.DAL
             }
         }
 
-        public bool RegisterAward(string title, byte[] image)
+        public bool RegisterAward(string title)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand("RegisterAward", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@title", title);
-                command.Parameters.AddWithValue("@image", image);
                 connection.Open();
                 return command.ExecuteNonQuery() == 1;
             }
@@ -105,9 +113,57 @@ namespace EpamTasks.DAL
             }
         }
 
+        public Award SelectAward(int awardId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("SelectAward", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@award_id", awardId);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                Award award = new Award();
+                if (reader.Read())
+                {
+                    award = new Award
+                    {
+                        Id = (int)reader["Id"],
+                        Title = (string)reader["Title"],
+                        Description = reader.IsDBNull(2) ? null : (string)reader["Description"] 
+                    };
+                }
+
+                return award;
+            }
+        }
+
         public byte[] SelectAwardImage(int awardId)
         {
-            throw new NotImplementedException();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("GetImageByAwardId", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@award_id", awardId);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                User user = new User();
+                if (reader.Read())
+                {
+                    try
+                    {
+                        return (byte[])reader["Image"];
+                    }
+                    catch (InvalidCastException)
+                    {
+                        return null;
+                    }
+                }
+
+                return null;
+            }
         }
 
         public IEnumerable<Award> SelectAwards()
@@ -125,11 +181,37 @@ namespace EpamTasks.DAL
                     Award award = new Award();
                     award.Id = (int)reader["Id"];
                     award.Title = (string)reader["Title"];
-                    award.Description = reader.IsDBNull(2)? null : (string)reader["Description"] ;
+                    award.Description = reader.IsDBNull(2)? null : (string)reader["Description"];
                     awards.Add(award);
                 }
 
                 return awards;
+            }
+        }
+
+        public byte[] SelectDefaultImage()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("SelectDefaultImage", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                User user = new User();
+                if (reader.Read())
+                {
+                    try
+                    {
+                        return (byte[])reader["DefaultImage"];
+                    }
+                    catch (InvalidCastException)
+                    {
+                        return null;
+                    }
+                }
+
+                return null;
             }
         }
 
@@ -242,12 +324,52 @@ namespace EpamTasks.DAL
 
         public byte[] SelectUserImage(int userId)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("GetImageByUserId", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@user_id", userId);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                User user = new User();
+                if (reader.Read())
+                {
+                    try
+                    {
+                        return (byte[])reader["Avatar"];
+                    }
+                    catch(InvalidCastException)
+                    {
+                        return null;
+                    }
+                }
+
+                return null;
+            }
         }
 
         public bool UpdateRights(int userId, int RightId)
         {
             throw new NotImplementedException();
+        }
+
+        public bool UploadImageToAward(int awardId, byte[] image)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UploadImageToUser(int userId, byte[] image)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("UploadImageToUser", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@user_id", userId);
+                command.Parameters.AddWithValue("@image", image);
+                connection.Open();
+                return command.ExecuteNonQuery() == 1;
+            }
         }
     }
 }

@@ -16,20 +16,23 @@ namespace EpamTasks.IBLC
         bool SaveInFile();
         IEnumerable<Award> GetAwards();
         IEnumerable<Award> GetAwardsByUserId(int id);
-        bool AddNewAward(string awardName, byte[] image);
+        bool AddNewAward(string awardName);
         bool RemoveAward(int awardId);
         bool GiveAwardToUser(int userId, int awardId);
         DateTime EnterTheBirthDateTime(string dateTimeString);
         string ShowAllUsers();
         User GetUserById(int id, bool needShortInfo);
-        KeyValuePair<int, Award> GetAwardById(int id);
+        Award GetAwardById(int id);
         bool DepriveAward(int userId, int awardId);
-        string GetImageLocationByUserId(int id);
-        void SetImageLocationByUserId(int id, string imagePath);
-        string GetImageLocationByAwardId(int id);
-        void SetImageLocationByAwardId(int id, string imagePath);
+        string GetImageByUserId(int id);
+        bool SetImageByUserId(int id, byte[] image);
+        string GetImageByAwardId(int id);
+        bool SetImageByAwardId(int id, string imagePath);
         IEnumerable<User> SelectShortUsersInfo(int count, int offset);
         byte[] SelectUserImage(int userId);
         byte[] SelectAwardImage(int awardId);
+
+        byte[] SelectDefaultImage();
+        short CheckRightsVolume(string login, string password);
     }
 }

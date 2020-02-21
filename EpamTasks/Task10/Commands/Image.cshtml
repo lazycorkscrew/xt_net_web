@@ -2,15 +2,15 @@
 @using EpamTasks.PL;
 @{
     Layout = null;
-
     Response.ContentType = "image/jpeg";
 
-    if (IsPost)
+
+    //if (IsPost)
     {
         string userIdstr = Request["user_id"];
         string awardIdstr = Request["award_id"];
-        bool needUser = string.IsNullOrEmpty(userIdstr);
-        bool needAward = string.IsNullOrEmpty(userIdstr);
+        bool needUser = !string.IsNullOrEmpty(userIdstr);
+        bool needAward = !string.IsNullOrEmpty(awardIdstr);
 
         byte[] picture = new byte[] { };
 
@@ -30,8 +30,14 @@
             }
         }
 
-
-        Response.BinaryWrite(picture);
+        if(picture != null)
+        {
+            Response.BinaryWrite(picture);
+        }
+        else
+        {
+            Response.BinaryWrite(LogicProvider.UserLogic.SelectDefaultImage());
+        }
     }
 
 

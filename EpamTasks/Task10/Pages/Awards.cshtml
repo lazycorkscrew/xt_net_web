@@ -6,8 +6,8 @@
     string newAwardName = Request["newAwardName"];
     if(!string.IsNullOrEmpty(newAwardName))
     {
-        LogicProvider.UserLogic.AddNewAward(newAwardName, new byte[] { });
-        LogicProvider.UserLogic.SaveInFile();
+        LogicProvider.UserLogic.AddNewAward(newAwardName);
+        //LogicProvider.UserLogic.SaveInFile();
     }
 
     List<Award> awards = LogicProvider.UserLogic.GetAwards() as List<Award>;

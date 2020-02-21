@@ -84,9 +84,10 @@ namespace EpamTasks.BLL
             //return users.Awards;
         }
 
-        public KeyValuePair<int, Award> GetAwardById(int id)
+        public Award GetAwardById(int id)
         {
-            return new KeyValuePair<int, Award> (id,  users.Awards[id]);
+            throw new NotImplementedException();
+            //return new KeyValuePair<int, Award> (id,  users.Awards[id]);
         }
 
         public IEnumerable<Award> GetAwardsByUserId(int id)
@@ -94,33 +95,36 @@ namespace EpamTasks.BLL
             throw new NotImplementedException();
         }
 
-        public string GetImageLocationByUserId(int id)
+        public string GetImageByUserId(int id)
         {
             throw new NotImplementedException();
             //return users[id].ProfileImage ?? string.Empty;
         }
 
-        public void SetImageLocationByUserId(int id, string imageName)
+        public bool SetImageByUserId(int id, byte[] image)
         {
-            users.SetImageName(id, imageName);
+            throw new NotImplementedException();
+            //users.SetImageName(id, imageName);
+            //return true;
         }
 
-        public string GetImageLocationByAwardId(int id)
+        public string GetImageByAwardId(int id)
         {
             throw new NotImplementedException();
             //return Path.Combine(Settings1.Default.AwardsImagesPath, GetAwards()[id].ImagePath);
         }
 
-        public void SetImageLocationByAwardId(int id, string imagePath)
+        public bool SetImageByAwardId(int id, string imagePath)
         {
             throw new NotImplementedException();
             //users.Awards[id].ImagePath = imagePath;
         }
 
 
-        public bool AddNewAward(string awardName, byte[] image)
+        public bool AddNewAward(string awardName)
         {
-            return users.AddNewAward(awardName, null);
+            throw new NotImplementedException();
+            //return users.AddNewAward(awardName);
         }
 
         public bool RemoveAward(int awardId)
@@ -135,8 +139,7 @@ namespace EpamTasks.BLL
 
         public DateTime EnterTheBirthDateTime(string dateTimeString)
         {
-            DateTime dateTime;
-            DateTime.TryParse(dateTimeString, out dateTime);
+            DateTime.TryParse(dateTimeString, out DateTime dateTime);
             return dateTime;
         }
 
@@ -172,6 +175,16 @@ namespace EpamTasks.BLL
         }
 
         public byte[] SelectAwardImage(int awardId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] SelectDefaultImage()
+        {
+            throw new NotImplementedException();
+        }
+
+        public short CheckRightsVolume(string login, string password)
         {
             throw new NotImplementedException();
         }

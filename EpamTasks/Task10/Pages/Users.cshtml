@@ -4,7 +4,9 @@
     Layout = null;
 
     string pageNumStr = Request["pagenum"];
-    int currentPageNum; 
+    int currentPageNum;
+
+    int rowsCount = 10;
 
 
     if(!int.TryParse(pageNumStr, out currentPageNum))
@@ -17,19 +19,22 @@
     <div>
         @{
             //bool b = LogicProvider.UserLogic.SaveInFile();
-            List<User> users = LogicProvider.UserLogic.SelectShortUsersInfo(10, 10*(currentPageNum-1)) as List<User>;
+            List<User> users = LogicProvider.UserLogic.SelectShortUsersInfo(rowsCount, rowsCount * (currentPageNum - 1)) as List<User>;
 
-            <div>
+            <p>
                 @foreach (User user in users)
                 {
-                    <div><a href="~/?page=user&id=@user.Id"><img src="~/Commands/Image?user_id=@user.Id"/>@user.Id @user.Name</a></div>
+                    <div class="mini_img"><a href="~/?page=user&id=@user.Id"><img  src="~/Commands/Image?user_id=@user.Id" />@user.Id @user.Name</a></div>
                 }
-            </div>
+            </p>
             if (currentPageNum > 1)
             {
                 <a href="~/?page=users&pagenum=@(currentPageNum-1)">&#60;</a>
             }
 
-            <a href="~/?page=users&pagenum=@(currentPageNum+1)">&#62;</a>
+            if (users.Count >= rowsCount)
+            {
+                <a chass="avatar" href="~/?page=users&pagenum=@(currentPageNum+1)" style="width:80px; height:auto;">&#62;</a>
+            }
         }
     </div>

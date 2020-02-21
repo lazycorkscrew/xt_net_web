@@ -1,0 +1,14 @@
+﻿@using EpamTasks.Entities;
+@using EpamTasks.PL;
+@{
+    Layout = null;
+    string awardIdStr = Request["award_id"];
+    if (!string.IsNullOrEmpty(awardIdStr) && int.TryParse(awardIdStr, out int awardId))
+    {
+        if (LogicProvider.UserLogic.RemoveAward(awardId))
+        {
+            Response.Redirect("~/?page=awards");
+        }
+    }
+    <div>Что-то пошло не так.</div>
+}

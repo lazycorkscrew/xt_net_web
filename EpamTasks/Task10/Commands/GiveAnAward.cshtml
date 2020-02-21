@@ -8,7 +8,7 @@
 
     if (IsPost && int.TryParse(Request["userId"], out userId) && int.TryParse(Request["awardId"], out awardId))
     {
-        if(LogicProvider.UserLogic.GiveAwardToUser(userId, awardId) && LogicProvider.UserLogic.SaveInFile())
+        if(LogicProvider.UserLogic.GiveAwardToUser(userId, awardId))
         {
             Response.Redirect($"~/?page=user&id={userId}");
         }

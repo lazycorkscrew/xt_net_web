@@ -11,9 +11,9 @@ namespace EpamTasks.BLL
 {
     public class UserLogicFromDB : IUserLogicContracts
     {
-        public bool AddNewAward(string awardName, byte[] image)
+        public bool AddNewAward(string awardName)
         {
-            return DataAccessProvider.DBAccessor.RegisterAward(awardName, image);
+            return DataAccessProvider.DBAccessor.RegisterAward(awardName);
         }
 
         public bool AddUser(string name, DateTime birthDay, string login, string password)
@@ -24,7 +24,8 @@ namespace EpamTasks.BLL
 
         public bool DepriveAward(int userId, int awardId)
         {
-            throw new NotImplementedException();
+            return DataAccessProvider.DBAccessor.DepriveUserOfAward(userId, awardId);
+            //throw new NotImplementedException();
         }
 
         public DateTime EnterTheBirthDateTime(string dateTimeString)
@@ -37,9 +38,9 @@ namespace EpamTasks.BLL
             throw new NotImplementedException();
         }
 
-        public KeyValuePair<int, Award> GetAwardById(int id)
+        public Award GetAwardById(int id)
         {
-            throw new NotImplementedException();
+            return DataAccessProvider.DBAccessor.SelectAward(id);
         }
 
         public IEnumerable<Award> GetAwards()
@@ -52,12 +53,12 @@ namespace EpamTasks.BLL
             return DataAccessProvider.DBAccessor.SelectUserAwards(id);
         }
 
-        public string GetImageLocationByAwardId(int id)
+        public string GetImageByAwardId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public string GetImageLocationByUserId(int id)
+        public string GetImageByUserId(int id)
         {
             throw new NotImplementedException();
         }
@@ -70,7 +71,7 @@ namespace EpamTasks.BLL
 
         public bool GiveAwardToUser(int userId, int awardId)
         {
-            throw new NotImplementedException();
+            return DataAccessProvider.DBAccessor.GiveAwardToUser(userId, awardId);
         }
 
         public bool LoadFromFile()
@@ -80,7 +81,7 @@ namespace EpamTasks.BLL
 
         public bool RemoveAward(int awardId)
         {
-            throw new NotImplementedException();
+            return DataAccessProvider.DBAccessor.DeleteAward(awardId);
         }
 
         public bool RemoveUserAt(int id)
@@ -93,11 +94,6 @@ namespace EpamTasks.BLL
             throw new NotImplementedException();
         }
 
-        public byte[] SelectAwardImage(int awardId)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<User> SelectShortUsersInfo(int count, int offset)
         {
             return DataAccessProvider.DBAccessor.SelectShortUsersInfo(count, offset);
@@ -105,15 +101,20 @@ namespace EpamTasks.BLL
 
         public byte[] SelectUserImage(int userId)
         {
-            throw new NotImplementedException();
+            return DataAccessProvider.DBAccessor.SelectUserImage(userId);
         }
 
-        public void SetImageLocationByAwardId(int id, string imagePath)
+        public byte[] SelectAwardImage(int awardId)
         {
-            throw new NotImplementedException();
+            return DataAccessProvider.DBAccessor.SelectAwardImage(awardId);
         }
 
-        public void SetImageLocationByUserId(int id, string imagePath)
+        public bool SetImageByUserId(int id, byte[] image)
+        {
+            return DataAccessProvider.DBAccessor.UploadImageToUser(id, image);
+        }
+
+        public bool SetImageByAwardId(int id, string imagePath)
         {
             throw new NotImplementedException();
         }
@@ -121,6 +122,16 @@ namespace EpamTasks.BLL
         public string ShowAllUsers()
         {
             throw new NotImplementedException();
+        }
+
+        public byte[] SelectDefaultImage()
+        {
+            return DataAccessProvider.DBAccessor.SelectDefaultImage();
+        }
+
+        public short CheckRightsVolume(string login, string password)
+        {
+            return DataAccessProvider.DBAccessor.CheckRightsVolume(login, password);
         }
     }
 }

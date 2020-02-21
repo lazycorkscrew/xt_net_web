@@ -7,7 +7,7 @@
 
     if(!string.IsNullOrEmpty(awardName))
     {
-        if(LogicProvider.UserLogic.AddNewAward(awardName, string.Empty) && LogicProvider.UserLogic.SaveInFile())
+        if(LogicProvider.UserLogic.AddNewAward(awardName))
         {
             Response.Redirect("~/?page=awards");
         }
