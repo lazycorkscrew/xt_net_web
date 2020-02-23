@@ -2,29 +2,30 @@
 @using EpamTasks.PL;
 @{
     Layout = "~/Layouts/_MainLayout.cshtml";
-    string login = Response.Cookies["login"].
-    //string password = Response.Cookies.Get("password").Value;
+    string login = Request?.Cookies["login"]?.Value;
+    string password = Request?.Cookies["password"]?.Value;
+    string page = Request["page"] ?? "Welcome";
+    User user = LogicProvider.UserLogic.SelectFullUserByLoginAndPass(login, password);
+    Session["user"] = user;
 
-    //bool a = LogicProvider.UserLogic.LoadFromFile();
-    string page = Request["page"];
-    switch (page)
+
+    //Вариант без обновления сессии
+    /*User user = (Session["user"] as User) ?? null;
+
+    if(!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password) && user == null)
     {
-        case "users": @RenderPage($"~/Pages/Users.cshtml"); break;
-        case "user": @RenderPage($"~/Pages/User.cshtml"); break;
-        case "awards": @RenderPage($"~/Pages/Awards.cshtml"); break;
-        case "award": @RenderPage($"~/Pages/Award.cshtml"); break;
-        default: @RenderPage($"~/Pages/Welcome.cshtml"); break;
-    }
+        user = LogicProvider.UserLogic.SelectFullUserByLoginAndPass(login, password);
+        Session["user"] = user;
+    }*/
 
-    /*try
+    try
     {
         @RenderPage($"~/Pages/{page}.cshtml");
     }
-
-    catch (Exception)
+    catch (Exception exception)
     {
-
-    }*/
+        @RenderPage($"~/Pages/Error404.cshtml");
+    }
 
 }
 

@@ -188,5 +188,15 @@ namespace EpamTasks.BLL
         {
             throw new NotImplementedException();
         }
+
+        public User SelectFullUserByLoginAndPass(string login, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetMd5Hash(string text)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

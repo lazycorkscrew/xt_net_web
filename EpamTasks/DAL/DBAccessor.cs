@@ -109,7 +109,14 @@ namespace EpamTasks.DAL
                 command.Parameters.AddWithValue("@login", login);
                 command.Parameters.AddWithValue("@password", password);
                 connection.Open();
-                return command.ExecuteNonQuery() == 1;
+                try
+                {
+                    return command.ExecuteNonQuery() == 1;
+                }
+                catch(SqlException ex)
+                {
+                    return false;
+                }
             }
         }
 
@@ -241,7 +248,43 @@ namespace EpamTasks.DAL
             }
         }
 
-        public User SelectShortUserInfo(int userId)
+        public User SelectFullUserInfoByLoginAndPass(string login, string password)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("SelectFullUserInfoByLoginAndPass", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@login", login);
+                command.Parameters.AddWithValue("@password", password);
+                connection.Open();
+                SqlDataReader reader = null;
+
+                try
+                {
+                    reader = command.ExecuteReader();
+                }
+                catch(SqlException ex)
+                {
+                    return null;
+                }
+                User user = new User();
+                if (reader.Read())
+                {
+                    user = new User
+                    {
+                        Id = (int)reader["Id"],
+                        Name = (string)reader["Name"],
+                        DateOfBirth = (DateTime)reader["DateOfBirth"],
+                        Rank = (string)reader["Rank"],
+                        Power = (short)reader["Power"]
+                    };
+                }
+
+                return user;
+            }
+        }
+
+        public User SelectShortUserInfo(int userId) 
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

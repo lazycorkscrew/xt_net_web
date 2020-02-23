@@ -2,62 +2,68 @@
 @using EpamTasks.PL;
 
 @{
-                Layout = null;
-                int id;
-                short rights = -1;
+    Layout = null;
+    User user = (Session["user"] as User);
+    int id;
 
-                
 
-                if(login != null && password != null)
-                {
-                    rights = LogicProvider.UserLogic.CheckRightsVolume(login, password);
-                }
+    if (int.TryParse(Request["id"], out id))
+    {
+        try
+        {
+            //User user = LogicProvider.UserLogic.GetUserById(id, false);
+            List<Award> userAwards = LogicProvider.UserLogic.GetAwardsByUserId(id) as List<Award>;
+            List<Award> allAwards = LogicProvider.UserLogic.GetAwards() as List<Award>;
 
-                if (int.TryParse(Request["id"], out id))
-                {
-                    try
-                    {
-
-                        User user = LogicProvider.UserLogic.GetUserById(id, false);
-                        List<Award> userAwards = LogicProvider.UserLogic.GetAwardsByUserId(id) as List<Award>;
-                        List<Award> allAwards = LogicProvider.UserLogic.GetAwards() as List<Award>;
-
-                <div>@user.Name</div>
-                <img class="full_img" src="~/Commands/Image?user_id=@user.Id" )" />
+            <div class="user_style">
+                <div chass="user_header">@user.Name</div>
+                <div class="full_img">
+                    <div>
+                        <img src="~/Commands/Image?user_id=@id" )" alt="" />
+                    </div>
+                </div>
                 <ul>
                     @foreach (Award award in userAwards)
-            {
-                        <li>@award.Title<a href="~/Commands/DepriveAward.cshtml?userid=@user.Id&awardid=@award.Id">Отнять</a></li>
+                    {
+                        <li>
+                            @award.Title
+                            @if (id == user.Id || user.Power >= 2)
+                            {
+                                <a href="~/Commands/DepriveAward.cshtml?userid=@id&awardid=@award.Id">Отнять</a>
+                            }
+
+                        </li>
                     }
+
                 </ul>
-
-                <form action="~/Commands/GiveAnAward.cshtml" method="post">
-                    <input type="hidden" name="userId" value="@id" />
-                    <select name="awardId">
-                        @foreach (var award in allAwards)
-                        {
-                            <option value="@award.Id">@award.Title</option>
-                        }
-                    </select>
-                    <button>Вручить</button>
-                </form>
-
-                <form action="~/Commands/UploadImageToPlayer.cshtml?id=@id" method="post" enctype="multipart/form-data">
-                    <!--<input type="hidden" name="userId" value="" />-->
-                    <input type="file" name="userimage" />
-                    <button>Отправить</button>
-                </form>
+                @if (id == user.Id || user.Power >= 2)
+                {
+                    <form action="~/Commands/GiveAnAward.cshtml" method="post">
+                        <input type="hidden" name="userId" value="@id" />
+                        <select name="awardId">
+                            @foreach (var award in allAwards)
+                            {
+                                <option value="@award.Id">@award.Title</option>
+                            }
+                        </select>
+                        <button>Вручить</button>
+                    </form>
+                    <form action="~/Commands/UploadImageToPlayer.cshtml?id=@id" method="post" enctype="multipart/form-data">
+                        <!--<input type="hidden" name="userId" value="" />-->
+                        <input type="file" name="userimage" />
+                        <button>Отправить</button>
+                    </form>
+                }
+            </div>
 
         }
         catch (KeyNotFoundException)
         {
             @("Пользователь не найден.")
         }
-
     }
     else
     {
         @("Пожалуйста, не надо играться с аргументами...")
     }
 }
-    

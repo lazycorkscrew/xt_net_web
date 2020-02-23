@@ -14,7 +14,7 @@ body#task10 {
 .maincontent {
 	background-color: #d4f0ff;
 	width: 60%;
-	min-height:600px;
+	min-height:100%;
 	display: inline-block;
 	position: absolute;
 	margin: 0 auto;
@@ -40,20 +40,114 @@ h3{
 	text-align: center;
 }
 
-.mini_img {
-	text-align:center;
+.mini_user {
+	/*border: 1px solid black;*/
+	margin: 20px auto;
+	width: 90%;
+	height:10%;
+	padding: 10px;
+	background-color: aliceblue;
+	border-radius: 10px;
 }
 
-.mini_img img {
-	width: 150px;
+	.mini_user:hover {
+		border-left: 5px solid #7da6e5;
+		border-right: 5px solid #7da6e5;
+	}
+
+	.mini_user a {
+		font-size: 28px;
+		text-decoration: none;
+		color: royalblue;
+		font-family: 'Segoe Print';
+		padding-left:10px;
+	}
+
+	.mini_user div {
+		text-align: center;
+		min-width: 100px;
+		min-height: 100px;
+		width: 100px;
+		height: 100px;
+		border: 3px solid #7da6e5;
+		border-radius: 50%;
+		display: inline-block;
+		padding: 2px;
+		background-color: #2571bf;
+		vertical-align: middle;
+	}
+
+	.mini_user div img {
+		width: 100%;
+		height: 100%;
+		background-color: #f0f2f5;
+		position: relative;
+		position: static;
+		border-radius: 50%;
+	}
+
+/*.full_img img {
+	align-self: center;
+	width: 40%;
 	height: auto;
-	border-radius: 50%;
-	background-color: #f0f2f5;
 	position: relative;
 	position: static;
-	border: 1px solid black;
+}*/
+
+
+
+.user_style div {
+	font-size: 40px;
+	background-color: aliceblue;
+	margin: 10px auto;
+	padding: 10px 20px;
+	border-radius: 3px;
+	border: 1px solid #000;
+	width:70%;
+}
+
+.user_style ul {
+	background-color: white;
+	width: 70%;
+	margin: 40px auto;
+	padding: 20px;
+}
+
+.user_style form {
+	background-color: white;
+	width:60%;
+	padding:20px;
+	margin: 10px auto;
+	background-color:#f5fb9f;
 }
 
 .full_img {
-	align-self:center;
+	width: 50%; /*400px;*/
+	height: 400px;
+	padding: 20px;
+	background-color: #ffffff;
+	margin: 0 auto;
+	border: 1px solid #000;
+	border-radius: 3px;
+	box-shadow: 10px 10px 10px 3px rgb(80, 80, 80);
 }
+
+.full_img div {
+	margin: 0 auto;
+	padding: 0;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	background: #000000;
+	border: 1px solid #000;
+	border-radius: 3px;
+}
+
+	.full_img img {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		max-width: 100%;
+		max-height: 100%;
+	}

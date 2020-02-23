@@ -16,6 +16,7 @@ namespace EpamTasks.Entities
         public KeyValuePair<Award, int>[] Awards { get; set; }
         public byte[] ProfileImage { get; set; }
         public string Rank { get; set; }
+        public short Power { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
     }

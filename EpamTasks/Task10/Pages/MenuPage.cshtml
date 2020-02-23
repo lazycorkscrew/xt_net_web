@@ -1,5 +1,8 @@
-﻿@{
+﻿@using EpamTasks.Entities;
+@using EpamTasks.PL;
+@{
     Layout = null;
+    User user = (Session["user"] as User);
 }
 
 <div class="centr">
@@ -7,10 +10,25 @@
     <h3>О компании</h3>
     <p>Мы занимаемся качественной разработкой сайтов.</p>
 
-    
+
     <h3>Меню</h3>
     <ul>
-        <li><a href="~/Pages/AuthPage.cshtml">Войти</a></li>
+        @if (user != null)
+        {
+            <li>Здарова, @user.Name</li>
+            <li><a href="~/Commands/Logout.cshtml">Выйти</a></li>
+        }
+        else
+        {
+            <li><a href="~/Pages/Registration.cshtml">Регистрация</a></li>
+            <li><a href="~/AuthForm.aspx">Войти</a></li>
+        }
+
+        @if (user?.Power >= 2)
+        {
+            <li><a href="~/AuthForm.aspx">Админка</a></li>
+        }
+
         <li><a href="~/?page=users">Пользователи</a></li>
         <li><a href="~/?page=awards">Награды</a></li>
     </ul>

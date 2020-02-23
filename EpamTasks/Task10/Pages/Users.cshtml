@@ -24,7 +24,12 @@
             <p>
                 @foreach (User user in users)
                 {
-                    <div class="mini_img"><a href="~/?page=user&id=@user.Id"><img  src="~/Commands/Image?user_id=@user.Id" />@user.Id @user.Name</a></div>
+                    <div class="mini_user">
+                        <a href="~/?page=user&id=@user.Id">
+                        <div><img src="~/Commands/Image?user_id=@user.Id" /></div>
+                        @user.Name
+                        </a>
+                    </div>
                 }
             </p>
             if (currentPageNum > 1)

@@ -29,5 +29,6 @@ namespace EpamTasks.IDAC
         bool UploadImageToAward(int award_id, byte[] image);
         byte[] SelectDefaultImage();
         short CheckRightsVolume(string login, string password);
+        User SelectFullUserInfoByLoginAndPass(string login, string password);
     }
 }

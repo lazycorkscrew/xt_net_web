@@ -34,5 +34,8 @@ namespace EpamTasks.IBLC
 
         byte[] SelectDefaultImage();
         short CheckRightsVolume(string login, string password);
+
+        User SelectFullUserByLoginAndPass(string login, string password);
+        string GetMd5Hash(string text);
     }
 }
