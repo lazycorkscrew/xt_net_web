@@ -13,7 +13,12 @@ namespace Task10
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            string login = Request?.Cookies["login"]?.Value;
+            string password = Request?.Cookies["password"]?.Value;
+            if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
+            {
+                Response.Redirect("~/");
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
