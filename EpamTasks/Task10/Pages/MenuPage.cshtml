@@ -15,8 +15,8 @@
     <ul>
         @if (user != null)
         {
-            <li>Здарова, @user.Name</li>
-            <li><a href="~/Commands/Logout.cshtml">Выйти</a></li>
+            <li>Здарова, @user.Name <a href="~/Commands/Logout.cshtml">Выйти</a></li>
+            <li><a href="~/?page=user&id=@user.Id">Моя страница</a></li>
         }
         else
         {
