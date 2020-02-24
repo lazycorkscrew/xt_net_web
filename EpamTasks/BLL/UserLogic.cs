@@ -114,7 +114,7 @@ namespace EpamTasks.BLL
             //return Path.Combine(Settings1.Default.AwardsImagesPath, GetAwards()[id].ImagePath);
         }
 
-        public bool SetImageByAwardId(int id, string imagePath)
+        public bool SetImageByAwardId(int id, byte[] image)
         {
             throw new NotImplementedException();
             //users.Awards[id].ImagePath = imagePath;
@@ -195,6 +195,21 @@ namespace EpamTasks.BLL
         }
 
         public string GetMd5Hash(string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] SelectDefaultAwardImage()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Right> GetAllRights()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateRights(int userId, int rightId)
         {
             throw new NotImplementedException();
         }

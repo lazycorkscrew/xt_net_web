@@ -30,5 +30,8 @@ namespace EpamTasks.IDAC
         byte[] SelectDefaultImage();
         short CheckRightsVolume(string login, string password);
         User SelectFullUserInfoByLoginAndPass(string login, string password);
+        byte[] SelectDefaultAwardImage();
+
+        IEnumerable<Right> GetAllRights();
     }
 }

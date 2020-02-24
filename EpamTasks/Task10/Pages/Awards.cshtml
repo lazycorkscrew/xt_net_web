@@ -3,18 +3,25 @@
 @{
     Layout = null;
 
+
     string newAwardName = Request["newAwardName"];
-    if(!string.IsNullOrEmpty(newAwardName))
+    if (!string.IsNullOrEmpty(newAwardName))
     {
         LogicProvider.UserLogic.AddNewAward(newAwardName);
-        //LogicProvider.UserLogic.SaveInFile();
     }
 
     List<Award> awards = LogicProvider.UserLogic.GetAwards() as List<Award>;
 
-    foreach(Award award in awards)
+    foreach (Award award in awards)
     {
-        <div><a href="~/?page=award&id=@award.Id">@($"{award.Id}, {award.Title}")</a></div>
+        <div class="mini_user">
+            <a href="~/?page=award&id=@award.Id">
+                <div>
+                    <img src="~/Commands/Image?award_id=@award.Id" />
+                </div>
+                @($"{award.Id}, {award.Title}")
+            </a>
+        </div>
     }
 }
 

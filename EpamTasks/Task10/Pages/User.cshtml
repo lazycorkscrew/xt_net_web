@@ -13,52 +13,69 @@
         {
             User userPage = LogicProvider.UserLogic.GetUserById(id, false);
             List<Award> userAwards = LogicProvider.UserLogic.GetAwardsByUserId(id) as List<Award>;
-            List<Award> allAwards = LogicProvider.UserLogic.GetAwards() as List<Award>;
+            
+            
 
-            <div class="user_style">
-                <div chass="user_header">@userPage.Name</div>
-                <div class="full_img">
-                    <div>
-                        <img src="~/Commands/Image?user_id=@id" )" alt="" />
-                    </div>
-                </div>
+    <div class="user_style">
+        <div>@userPage.Name, дата рождения: @userPage.DateOfBirth.ToString("dd.MM.yyyy"), @userPage.Rank</div>
+        <div class="full_img">
+            <div>
+                <img src="~/Commands/Image?user_id=@id" )" alt="" />
+            </div>
+        </div>
 
-                <ul>
-                    @foreach (Award award in userAwards)
+        <ul>
+            @foreach (Award award in userAwards)
+            {
+                <li>
+                    <a href="~/?page=award&id=@award.Id">@award.Title</a>
+                    @if (user?.Power >= 1)
                     {
-                        <li>
-                            @award.Title
-                            @if ( user?.Power >= 2)
-                            {
-                                <a href="~/Commands/DepriveAward.cshtml?userid=@id&awardid=@award.Id">Отнять</a>
-                            }
-
-                        </li>
+                        <a href="~/Commands/DepriveAward.cshtml?userid=@id&awardid=@award.Id">Отнять</a>
                     }
 
-                </ul>
-                @if (user?.Power >= 2)
-                {
-                    <form action="~/Commands/GiveAnAward.cshtml" method="post">
-                        <input type="hidden" name="userId" value="@id" />
-                        <select name="awardId">
-                        @foreach (var award in allAwards)
-                        {
-                            <option value="@award.Id">@award.Title</option>
-                        }
-                        </select>
-                        <button>Вручить</button>
-                    </form>
-                }
-                @if (id == user?.Id || user?.Power >= 2)
-                {
-                    <form action="~/Commands/UploadImageToPlayer.cshtml?id=@id" method="post" enctype="multipart/form-data">
-                        <!--<input type="hidden" name="userId" value="" />-->
-                        <input type="file" name="userimage" />
-                        <button>Отправить</button>
-                    </form>
-                }
-            </div>
+                </li>
+            }
+
+        </ul>
+        @if (user?.Power >= 1)
+        {
+            List<Award> allAwards = LogicProvider.UserLogic.GetAwards() as List<Award>;
+            <form action="~/Commands/GiveAnAward.cshtml" method="post">
+                <input type="hidden" name="userId" value="@id" />
+                <select name="awardId">
+                    @foreach (var award in allAwards)
+                    {
+                        <option value="@award.Id">@award.Title</option>
+                    }
+                </select>
+                <button>Вручить</button>
+            </form>
+        }
+        @if (id == user?.Id || user?.Power >= 2)
+        {
+            <form action="~/Commands/UploadImageToPlayer.cshtml?id=@id" method="post" enctype="multipart/form-data">
+                <!--<input type="hidden" name="userId" value="" />-->
+                <input type="file" name="userimage" />
+                <button>Отправить</button>
+            </form>
+        }
+
+        @if (user?.Power >= 2)
+        {
+            List<Right> allRights = LogicProvider.UserLogic.GetAllRights() as List<Right>;
+            <form action="~/Commands/UpdateRights.cshtml" method="post">
+                <input type="hidden" name="userid" value="@id" />
+                <select name="rightid">
+                    @foreach (var right in allRights)
+                    {
+                        <option value="@right.Id">@right.Rank</option>
+                    }
+                </select>
+                <button>Вручить</button>
+            </form>
+        }
+    </div>
 
         }
         catch (KeyNotFoundException)

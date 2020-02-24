@@ -116,9 +116,9 @@ namespace EpamTasks.BLL
             return DataAccessProvider.DBAccessor.UploadImageToUser(id, image);
         }
 
-        public bool SetImageByAwardId(int id, string imagePath)
+        public bool SetImageByAwardId(int id, byte[] image)
         {
-            throw new NotImplementedException();
+            return DataAccessProvider.DBAccessor.UploadImageToAward(id, image);
         }
 
         public string ShowAllUsers()
@@ -154,6 +154,21 @@ namespace EpamTasks.BLL
 
                 return sBuilder.ToString();
             }
+        }
+
+        public byte[] SelectDefaultAwardImage()
+        {
+            return DataAccessProvider.DBAccessor.SelectDefaultAwardImage();
+        }
+
+        public IEnumerable<Right> GetAllRights()
+        {
+            return DataAccessProvider.DBAccessor.GetAllRights();
+        }
+
+        public bool UpdateRights(int userId, int rightId)
+        {
+            return DataAccessProvider.DBAccessor.UpdateRights(userId, rightId);
         }
     }
 }

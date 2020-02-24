@@ -4,32 +4,32 @@
     Layout = null;
     User user = (Session["user"] as User);
 }
-
-<div class="centr">
-
-    <h3>О компании</h3>
-    <p>Мы занимаемся качественной разработкой сайтов.</p>
-
-
-    <h3>Меню</h3>
-    <ul>
+    <div class="login_panel">
         @if (user != null)
         {
-            <li>Здарова, @user.Name <a href="~/Commands/Logout.cshtml">Выйти</a></li>
-            <li><a href="~/?page=user&id=@user.Id">Моя страница</a></li>
+            <p>@user.Rank, @user.Name  <a href="~/Commands/Logout.cshtml">Выйти</a></p>
         }
         else
         {
-            <li><a href="~/Pages/Registration.cshtml">Регистрация</a></li>
-            <li><a href="~/AuthForm.aspx">Войти</a></li>
+            <p>Вы можете <a href="~/AuthForm.aspx">Войти</a>, либо <a href="~/Pages/Registration.cshtml">Зарегистрироваться</a>.</p>
         }
+    </div>
+    <div class="centr">
+        
+        <h3>О компании</h3>
+        <h3>Меню</h3>
+        <ul>
+            @if (user != null)
+            {
+                <li><a href="~/?page=user&id=@user.Id">Моя страница</a></li>
+            }
 
-        @if (user?.Power >= 2)
-        {
-            <li><a href="~/AuthForm.aspx">Админка</a></li>
-        }
+            @if (user?.Power >= 2)
+            {
+                <li><a href="~/AuthForm.aspx">Админка</a></li>
+            }
 
-        <li><a href="~/?page=users">Пользователи</a></li>
-        <li><a href="~/?page=awards">Награды</a></li>
-    </ul>
-</div>
+            <li><a href="~/?page=users">Пользователи</a></li>
+            <li><a href="~/?page=awards">Награды</a></li>
+        </ul>
+    </div>

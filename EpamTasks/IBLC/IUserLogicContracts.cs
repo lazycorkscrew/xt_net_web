@@ -27,15 +27,17 @@ namespace EpamTasks.IBLC
         string GetImageByUserId(int id);
         bool SetImageByUserId(int id, byte[] image);
         string GetImageByAwardId(int id);
-        bool SetImageByAwardId(int id, string imagePath);
+        bool SetImageByAwardId(int id, byte[] image);
         IEnumerable<User> SelectShortUsersInfo(int count, int offset);
         byte[] SelectUserImage(int userId);
         byte[] SelectAwardImage(int awardId);
-
         byte[] SelectDefaultImage();
+        byte[] SelectDefaultAwardImage();
         short CheckRightsVolume(string login, string password);
 
         User SelectFullUserByLoginAndPass(string login, string password);
         string GetMd5Hash(string text);
+        IEnumerable<Right> GetAllRights();
+        bool UpdateRights(int userId, int rightId);
     }
 }

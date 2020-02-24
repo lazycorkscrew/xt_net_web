@@ -4,15 +4,34 @@
 @{
     Layout = null;
     int id;
+    User user = (Session["user"] as User);
 
     if (int.TryParse(Request["id"], out id))
     {
         try
         {
-            <img src="~/Commands/Image?award_id=@id"/>
-            @LogicProvider.UserLogic.GetAwardById(id).Title;
-            <div><a href="~/Commands/RemoveAward?award_id=@id">Удалить награду</a></div>
+            Award award = LogicProvider.UserLogic.GetAwardById(id);
+    <div class="user_style">
+        <div class="user_header">@award.Title</div>
+        <div class="full_img">
+            <div>
+                <img src="~/Commands/Image?award_id=@award.Id" />
+            </div>
+        </div>
 
+        @if(user.Power >= 1)
+        {
+            <ul>
+                <li>
+                    <a href="~/Commands/RemoveAward?award_id=@award.Id">Удалить награду</a>
+                </li>
+            </ul>
+            <form action="~/Commands/UploadImageToAward.cshtml?id=@award.Id" method="post" enctype="multipart/form-data">
+                <input type="file" name="userimage" />
+                <button>Отправить</button>
+            </form>
+        }
+    </div>
         }
         catch (KeyNotFoundException)
         {

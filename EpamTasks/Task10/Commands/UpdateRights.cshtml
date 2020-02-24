@@ -1,0 +1,26 @@
+﻿@using EpamTasks.Entities;
+@using EpamTasks.PL;
+
+@{
+    Layout = null;
+
+    User user = Session["user"] as User;
+
+    if (IsPost)
+    {
+        if(user.Power >=2)
+        {
+            if(int.TryParse(Request["userid"], out int userId) && int.TryParse(Request["rightid"], out int newRightId))
+            {
+                if(LogicProvider.UserLogic.UpdateRights(userId, newRightId))
+                {
+                    Response.Redirect("~/");
+                }
+            }
+        }
+
+        <div>Что-то пошло не так.</div>
+    }
+}
+
+

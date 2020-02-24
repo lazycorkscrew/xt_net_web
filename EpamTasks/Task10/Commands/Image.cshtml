@@ -14,7 +14,7 @@
 
         byte[] picture = new byte[] { };
 
-        if (needUser ^ needAward)
+        if (needUser != needAward)
         {
             int id;
 
@@ -27,16 +27,19 @@
             {
                 picture = LogicProvider.UserLogic.SelectAwardImage(id);
             }
+
+            if(picture != null)
+            {
+                Response.BinaryWrite(picture);
+            }
+            else
+            {
+                Response.BinaryWrite(needUser? LogicProvider.UserLogic.SelectDefaultImage(): 
+                    LogicProvider.UserLogic.SelectDefaultAwardImage());
+            }
         }
 
-        if(picture != null)
-        {
-            Response.BinaryWrite(picture);
-        }
-        else
-        {
-            Response.BinaryWrite(LogicProvider.UserLogic.SelectDefaultImage());
-        }
+        
     }
 
 

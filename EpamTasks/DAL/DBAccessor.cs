@@ -16,7 +16,6 @@ namespace EpamTasks.DAL
     {
         public static string connectionString = "Data Source=ХИМИК-ПК\\SQLEXPRESS; Initial Catalog=UsersAndRewards; Integrated Security=True";// False; User Id=; Password=" 
 
-
         public short CheckRightsVolume(string login, string password)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -27,12 +26,14 @@ namespace EpamTasks.DAL
                 command.Parameters.AddWithValue("@password", password);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                //return reader.Read() ? (short)reader["Power"] : -1;
                 if (reader.Read())
                 {
                     return (short)reader["Power"];
                 }
-                else return -1;
+                else
+                {
+                    return -1;
+                }
             }
         }
 
@@ -154,7 +155,6 @@ namespace EpamTasks.DAL
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@award_id", awardId);
                 connection.Open();
-
                 SqlDataReader reader = command.ExecuteReader();
                 User user = new User();
                 if (reader.Read())
@@ -180,7 +180,6 @@ namespace EpamTasks.DAL
                 SqlCommand command = new SqlCommand("SelectAwards", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 connection.Open();
-
                 SqlDataReader reader = command.ExecuteReader();
                 List<Award> awards = new List<Award>();
                 while (reader.Read())
@@ -203,7 +202,6 @@ namespace EpamTasks.DAL
                 SqlCommand command = new SqlCommand("SelectDefaultImage", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 connection.Open();
-
                 SqlDataReader reader = command.ExecuteReader();
                 User user = new User();
                 if (reader.Read())
@@ -211,6 +209,31 @@ namespace EpamTasks.DAL
                     try
                     {
                         return (byte[])reader["DefaultImage"];
+                    }
+                    catch (InvalidCastException)
+                    {
+                        return null;
+                    }
+                }
+
+                return null;
+            }
+        }
+
+        public byte[] SelectDefaultAwardImage()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("SelectDefaultAwardImage", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                User user = new User();
+                if (reader.Read())
+                {
+                    try
+                    {
+                        return (byte[])reader["DefaultAwardImage"];
                     }
                     catch (InvalidCastException)
                     {
@@ -230,7 +253,6 @@ namespace EpamTasks.DAL
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@user_id", userId);
                 connection.Open();
-
                 SqlDataReader reader = command.ExecuteReader();
                 User user = new User();
                 if (reader.Read())
@@ -258,7 +280,6 @@ namespace EpamTasks.DAL
                 command.Parameters.AddWithValue("@password", password);
                 connection.Open();
                 SqlDataReader reader = null;
-
                 try
                 {
                     reader = command.ExecuteReader();
@@ -292,7 +313,6 @@ namespace EpamTasks.DAL
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@user_id", userId);
                 connection.Open();
-
                 SqlDataReader reader = command.ExecuteReader();
                 User user = new User();
                 if (reader.Read())
@@ -319,7 +339,6 @@ namespace EpamTasks.DAL
                 command.Parameters.AddWithValue("@count", count);
                 command.Parameters.AddWithValue("@offset", offset);
                 connection.Open();
-
                 SqlDataReader reader = command.ExecuteReader();
                 List<User> users = new List<User>();
                 while (reader.Read())
@@ -328,14 +347,6 @@ namespace EpamTasks.DAL
                     user.Id = (int)reader["Id"];
                     user.Name = (string)reader["Name"];
                     users.Add(user);
-
-                    /*users.Add(new User { }
-                    
-                        Id = (int)reader["Id"],
-                        Name = (string)reader["Name"],
-                        DateOfBirth = DateTime.Parse((string)reader["DateOfBirth"]),
-                        Rank = (string)reader["Rank"]})*/
-
                 }
 
                 return users;
@@ -350,7 +361,6 @@ namespace EpamTasks.DAL
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@user_id", userId);
                 connection.Open();
-
                 SqlDataReader reader = command.ExecuteReader();
                 List<Award> awards = new List<Award>();
                 while (reader.Read())
@@ -373,7 +383,6 @@ namespace EpamTasks.DAL
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@user_id", userId);
                 connection.Open();
-
                 SqlDataReader reader = command.ExecuteReader();
                 User user = new User();
                 if (reader.Read())
@@ -394,12 +403,28 @@ namespace EpamTasks.DAL
 
         public bool UpdateRights(int userId, int RightId)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("UpdateRights", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@user_id", userId);
+                command.Parameters.AddWithValue("@right_id", RightId);
+                connection.Open();
+                return command.ExecuteNonQuery() == 1;
+            }
         }
 
         public bool UploadImageToAward(int awardId, byte[] image)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("UploadImageToAward", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@award_id", awardId);
+                command.Parameters.AddWithValue("@image", image);
+                connection.Open();
+                return command.ExecuteNonQuery() == 1;
+            }
         }
 
         public bool UploadImageToUser(int userId, byte[] image)
@@ -412,6 +437,27 @@ namespace EpamTasks.DAL
                 command.Parameters.AddWithValue("@image", image);
                 connection.Open();
                 return command.ExecuteNonQuery() == 1;
+            }
+        }
+
+        public IEnumerable<Right> GetAllRights()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("SelectRights", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                List<Right> rights = new List<Right>();
+                while (reader.Read())
+                {
+                    Right right = new Right();
+                    right.Id = (int)reader["Id"];
+                    right.Rank = (string)reader["Rank"];
+                    rights.Add(right);
+                }
+
+                return rights;
             }
         }
     }

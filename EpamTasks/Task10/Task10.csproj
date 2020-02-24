@@ -134,6 +134,7 @@
     <Content Include="Commands\RemoveAward.cshtml" />
     <Content Include="Layouts\_Content.cshtml" />
     <Content Include="Commands\Logout.cshtml" />
+    <Content Include="Commands\UpdateRights.cshtml" />
     <None Include="packages.config" />
     <Content Include="Pages\MenuPage.cshtml" />
     <Content Include="Pages\AuthPage.cshtml" />

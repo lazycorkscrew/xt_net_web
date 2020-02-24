@@ -9,7 +9,7 @@ body#task10 {
 	font-size: 60px;
 	color: white;
 	text-align: center;
-	font-family: Helvetica;
+	font-family: 'Segoe Script';
 }
 .maincontent {
 	background-color: #d4f0ff;
@@ -29,6 +29,25 @@ body#task10 {
 	margin: 0 auto;
 	width: 60%;
 }
+.login_panel {
+	background-color: #0690CF;
+	color: white;
+	padding: 10px 40px;
+	text-align: right;
+	font-size: 14pt;
+	font-family: Consolas;
+	white-space: nowrap;
+}
+
+	.login_panel a {
+		background-color: #20A4E1;
+		color: white;
+		padding: 10px 15px;
+		text-align: right;
+		font-size: 14pt;
+		font-family: Consolas;
+	}
+
  li {
     list-style-type: none; /* Убираем маркеры */
    }
